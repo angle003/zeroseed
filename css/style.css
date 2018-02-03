@@ -1,0 +1,146 @@
+﻿@charset "utf-8";
+.main {
+    margin: 0 auto;
+    width: 600px;
+    height: 2000px;
+    position: relative;
+    background-color: white;
+    
+}
+
+.top {
+    margin: 0 auto;
+    width: 600px;
+    height: 180px;
+    background-color: white;
+}
+
+ul {
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 3px solid rgba(5, 56, 167, 0.801); 
+}
+
+li {
+    float: left;
+}
+
+a:link,
+a:visited {
+    display: block;
+    width: 109px;
+    height: 70px;
+    font-weight: bold;
+    color:  rgba(5, 56, 167, 0.801);
+    border-right: 3px solid white;
+    background-color: #bebebe;
+    text-align: center;
+    font-size: 20PX;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+a:hover,
+a:active {
+    color: white;
+    background-color: rgba(12, 59, 124, 1);
+}
+.top .active{
+    color: white;
+    background-color: rgba(12, 59, 124, 1);
+}
+#lunbo ul li{
+    list-style: none;
+    width:600px;
+    height:100%;
+    text-align: center;
+    }
+#lunbo ul li:not(:first-child){
+    display: none;
+    }
+.main .search{
+    position: absolute;
+    top: 499px;
+    width: 575px;
+    height: 60px;
+    margin: 10px;
+    background: white;
+    background-color: white; 
+    border: 2px solid red;
+}
+.main .search .one{
+    height: 60px;
+    width: 400px;
+    border: none;
+}
+.main .search .two{
+    height: 60px;
+    width: 150px;
+    float: right;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    background-color: red;
+}
+.main .box{
+    position: absolute;
+    top: 590px;
+    width: 600px;
+    height: 180px;
+}
+.main .box .rectangle{
+    float: left;
+    width:118px;
+    height:174px;
+    background-color:rgb(12, 59, 124);
+    border-right: 2px solid white; 
+}
+.main .box .rectangle img{
+    margin: 18px;
+}
+.main .box .rectangle p{
+    margin-left: 10px;
+    margin-top: -10px;
+    text-align: center;
+    font-size: 23px;
+    font-family: sans-serif;
+    color: white;
+}
+.main .daohan{
+    position: absolute;
+    top: 750px;
+    width: 600px;
+}
+.main .daohan h1{
+    margin-left: 230px;
+    color: rgb(12, 59, 124);
+}
+.main .daohan img{
+    margin-left: 200px;
+    margin-top: -20px;
+}
+.main .daohan .daohan_box{
+    width: 600px;
+    height: 800px;
+    z-index: -1;
+}
+.main .daohan .daohan_box .circle{
+    float: left;
+    width: 200px;
+    height: 200px;
+}
+.main .daohan .daohan_box .circle img{
+    margin: 20px;
+    margin-top: 10px;
+    border-radius: 50%;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 60px;
+    background-color:#2D3A4C ;
+}
