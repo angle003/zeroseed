@@ -1,0 +1,28 @@
+.glyphicons-list {
+    margin-top: 0;
+    list-style: none;
+    float: right;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 450px) {
+    .glyphicons-list {
+        margin-top: -18px;
+        margin-right: 0px;
+    }
+}
+
+.glyphicons-list li {
+    float: left;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.blog-post {
+    margin-bottom: 100px;
+}
+
+.blog-post p img {
+    border-radius: 50%;
+    border: 1px solid wheat;
+}
