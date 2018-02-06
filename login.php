@@ -16,3 +16,5 @@ if($row=mysql_fetch_array($result)){
    echo "login fail";
 }
 
+
+?>

@@ -7,7 +7,7 @@
 
 @media screen and (max-width: 450px) {
     .glyphicons-list {
-        margin-top: -18px;
+        margin-top: -10px;
         margin-right: 0px;
     }
 }
@@ -25,4 +25,9 @@
 .blog-post p img {
     border-radius: 50%;
     border: 1px solid wheat;
+margin-left:-10px;
+margin-right:10px;
+width: 48px;
+height: 48px;
 }
+

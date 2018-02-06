@@ -1,3 +1,13 @@
+<?php
+
+$con=mysql_connect("localhost","root","123");
+if(!$con){
+    die("error!".mysql_error($con));
+}
+mysql_select_db("zeroseed",$con);
+$result=mysql_query("select * from blog");
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -83,17 +93,23 @@
 
             <div class="col-sm-8 blog-main">
 
-                <div class="blog-post">
-                    <p class="blog-post-title" style=" position: relative;"><img style="margin-left:-10px;margin-right:10px;width: 48px;
-                        height: 48px;" src="images/img1.jpg" /><a href="#" style="font-size: 2em;">Jessica</a><br>
-                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;">January 1, 2017 </span>
+
+
+<?php
+
+while ($row=mysql_fetch_array($result)) {
+    $user_id=$row['blog_user_id'];
+    $res=mysql_query("select * from user_info where user_id='".$user_id."'");
+    $user_info=mysql_fetch_array($res);
+  ?>
+   <div class="blog-post">
+                    <p class="blog-post-title" style=" position: relative;">
+                    <?php echo "<img src='".$user_info['user_image_url']."' />"; ?>      
+                        <a href="#" style="font-size: 2em;"><?php  echo $user_info['user_info_nickname']; ?></a><br>
+                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_cretime']; ?> </span>
                     </p>
-                    <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                    <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis
-                        consectetur purus sit amet fermentum.</p>
-                    <blockquote>
-                        <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    </blockquote>
+                    <p><?php echo $row['blog_content']; ?></p>
+                   
                     <ul class="glyphicons-list">
                         <li>
                             <a href="#"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -106,37 +122,14 @@
                             </a>
                         </li>
                     </ul>
-                </div>
-                <!-- /.blog-post -->
+    </div>
+<?php } ?><!-- blog-post  -->
+              
 
 
-                <div class="blog-post">
-                    <p class="blog-post-title" style=" position: relative;"><img style="margin-left:-10px;margin-right:10px;width: 48px;
-                            height: 48px;" src="images/img2.jpg" /><a href="#" style="font-size: 2em;">Angelia</a><br>
-                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;">January 1, 2014 </span>
-                    </p>
-                    <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                    <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis
-                        consectetur purus sit amet fermentum.</p>
-                    <blockquote>
-                        <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    </blockquote>
+              
 
-                    <ul class="glyphicons-list">
-                        <li>
-                            <a href="#"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                <span class="glyphicon-class">0 like</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                    <span class="glyphicon-class">0 comment</span>
-                                </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.blog-post -->
-
+        
 
 
             </div>
