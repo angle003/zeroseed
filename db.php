@@ -10,8 +10,7 @@ function conn(){
    mysql_select_db("zeroseed",$con);
    return $con;
 }
-  
-  
+   
 function getBlogById($id){ 
   $con=conn();
   $res=mysql_query("select * from blog where blog_id='".$id."'");
@@ -42,6 +41,14 @@ function getCommentsByBlogId($id){
   return $nums[0];
 }
 
+function  addLikesByBlogId($id){
+  $con=conn();
+  $res=mysql_query("select blog_likes from blog where blog_id ='".$id."'");
+  $nums=mysql_fetch_row($res);
+  $nums[0]=$nums[0]+1;
+  $res=mysql_query("update blog set blog_likes='".$nums[0]."' where blog_id ='".$id."'");
+  return $nums[0];
+}
 
- ?>
+?>
    

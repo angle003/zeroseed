@@ -22,6 +22,7 @@
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
+     <script src="js/ajax.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -45,6 +46,7 @@
     $blogs=getBlogById($blog_id);
     $blog=mysql_fetch_array($blogs);
     $comnum=getCommentsByBlogId($blog_id);
+    // $add=addLikesByBlogId($blog_id);
  ?>
         <div class="blog-header">
             <h1 class="blog-title text-center"><?php echo $blog['blog_title']; ?></h1>
@@ -57,14 +59,14 @@
 
                 <div class="blog-post">
 
-                    <p><?php echo $blog['blog_content'];  ?></p>
+                    <p><?php echo $blog['blog_content']; ?></p>
                     <p class="blog-post-title"><a href="#">by Jessica</a><br>
                         <span class="blog-post-meta ">January 1, 2017 </span>
                     </p>
                     <ul class="glyphicons-list">
                         <li>
-                            <a href="#"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                <span class="glyphicon-class">0 like</span>
+                            <a href="javascript:volid(0);" onclick="<?php echo "showResult1(".$blog_id.")"; ?>" ><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                <span id="<?php echo "blog_likes_".$blog_id; ?>" class="glyphicon-class"><?php echo $blog['blog_likes']; ?> like</span>
                             </a>
                         </li>
                         <li>
@@ -77,6 +79,8 @@
                 <!-- /.blog-post -->
                 <h2>comments</h2>
                 <hr>
+
+
 
                 <div class="blog-post-comment">
                     <p class="blog-post-title" style=" position: relative;"><img style="margin-left:-10px;margin-right:10px;width: 48px;
@@ -94,28 +98,6 @@
                             <a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                                         <span class="glyphicon-class">0 comment</span>
                             </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.blog-post-comment -->
-
-
-                <div class="blog-post-comment">
-                    <p class="blog-post-title" style=" position: relative;"><img style="margin-left:-10px;margin-right:10px;width: 48px;
-                                    height: 48px;" src="images/img1.jpg" /><a href="#" style="font-size: 2em;">Jessica</a><br>
-                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;">January 1, 2017 </span>
-                    </p>
-                    <p>This blog post shows a few different types of .</p>
-                    <ul class="glyphicons-list-comment">
-                        <li>
-                            <a href="#"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                <span class="glyphicon-class">0 like</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                            <span class="glyphicon-class">0 comment</span>
-                                        </a>
                         </li>
                     </ul>
                 </div>

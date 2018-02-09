@@ -21,6 +21,7 @@
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
+     <script src="js/ajax.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -67,12 +68,12 @@
                    
                     <ul class="glyphicons-list">
                         <li>
-                            <a href="#"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                <span class="glyphicon-class">0 like</span>
+                            <a href="javascript:volid(0);" onclick="<?php echo "showResult1(".$blog_id.")"; ?>"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                <span id="<?php echo "blog_likes_".$blog_id; ?>" class="glyphicon-class"><?php echo $row['blog_likes']; ?> like</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo "comment.php?blog_id=".$blog_id ?>" ><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                            <a href="<?php echo "comment.php?blog_id=".$blog_id; ?>" ><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                                 <span class="glyphicon-class"><?php echo $comnum; ?> comment</span>
                             </a>
                         </li>

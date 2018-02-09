@@ -1,3 +1,10 @@
+a{
+    text-decoration:none !important; 
+}
+a:visited {
+    color:purple;
+    text-decoration:none !important;
+}
 .glyphicons-list {
     margin-top: 0;
     list-style: none;
