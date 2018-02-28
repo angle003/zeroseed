@@ -65,7 +65,7 @@
                     </p>
                     <ul class="glyphicons-list">
                         <li>
-                            <a href="javascript:volid(0);" onclick="<?php echo "showResult1(".$blog_id.")"; ?>" ><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                            <a href="javascript:void(0);" onclick="<?php echo "showResult1(".$blog_id.")"; ?>" ><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                                 <span id="<?php echo "blog_likes_".$blog_id; ?>" class="glyphicon-class"><?php echo $blog['blog_likes']; ?> like</span>
                             </a>
                         </li>
@@ -81,36 +81,65 @@
                 <hr>
 
 
-
+<?php  
+     $res=getCommentByBlogId($blog_id);
+     while ($row=mysql_fetch_array($res)) {
+        $user_info=getUserinfoById($row['bolg_comment_uid']);
+        $comment_id=$row['blog_comment_id'];
+        $comments=getCommentComsCount($comment_id);
+?>
                 <div class="blog-post-comment">
-                    <p class="blog-post-title" style=" position: relative;"><img style="margin-left:-10px;margin-right:10px;width: 48px;
-                                height: 48px;" src="images/img1.jpg" /><a href="#" style="font-size: 2em;">Jessica</a><br>
-                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;">January 1, 2017 </span>
+                    <p class="blog-post-title" style=" position: relative;">
+                        <?php echo "<img src='".$user_info['user_image_url']."' />"; ?>
+                       
+                                <a href="#" style="font-size: 2em;"><?php echo $user_info['user_info_nickname']; ?></a><br>
+                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_comment_cretime']; ?></span>
                     </p>
-                    <p>This blog post shows a few different types of .</p>
+                    <p><?php echo $row['blog_comment_content']; ?></p>
                     <ul class="glyphicons-list-comment">
                         <li>
-                            <a href="#"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                <span class="glyphicon-class">0 like</span>
+                            <a  href="javascript:void(0);" onclick="<?php echo "show(".$comment_id.")"; ?>" > <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                <span id="<?php echo "blog_comment_likes_".$comment_id; ?>" class="glyphicon-class"><?php echo $row['blog_comment_likes']; ?> like</span>
                             </a>
                         </li>
                         <li>
                             <a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                        <span class="glyphicon-class">0 comment</span>
+                                        <span class="glyphicon-class"><?php echo $comments; ?> comment</span>
                             </a>
                         </li>
                     </ul>
                 </div>
                 <!-- /.blog-post-comment -->
+<?php
+    $comment_coms=getCommentComs($comment_id);
+    while ($ro=mysql_fetch_array($comment_coms)) {
+        $com_user_info=getUserinfoById($ro['bolg_comment_uid']);
+        $com_comment_id=$ro['blog_comment_id'];
+?>
+ <div class="blog-post-comment"  >
+                    <p class="blog-post-title" style="position: relative;margin-left: 20px;">
+                        <?php echo "<img src='".$com_user_info['user_image_url']."' />"; ?>
+                       
+                                <a href="#" style="font-size: 2em;"><?php echo $com_user_info['user_info_nickname']; ?></a><br>
+                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $ro['blog_comment_cretime']; ?></span>
+                    </p>
+                    <p style="margin-left: 20px;"><?php echo $row['blog_comment_content']; ?></p>
+                    <ul class="glyphicons-list-comment" style="margin-right: 200px;" ontouch="showWindow()">
+                        <li>
+                            <a  href="javascript:void(0);" onclick="<?php echo "show(".$com_comment_id.")"; ?>"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                <span id="<?php echo "blog_comment_likes_".$com_comment_id; ?>" class="glyphicon-class"   ><?php echo $ro['blog_comment_likes']; ?> like</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-
-
-
-
-
+<?php 
+   } 
+} ?>
+         <a onclick="alert('ZeroSeed')">--</a>
             </div>
             <!-- /.blog-main -->
-
+                
             <?php include "right.html"; ?>
             <!-- /.blog-sidebar -->
         </div>
@@ -121,8 +150,8 @@
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-        window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+    <script >
+        window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>'); 
     </script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>

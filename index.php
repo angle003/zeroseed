@@ -37,7 +37,6 @@
 
         <!-- Main jumbotron for a primary marketing message or call to action -->
         
-
         <hr>
         <hr>
 
@@ -72,8 +71,9 @@
                                 <span id="<?php echo "blog_likes_".$blog_id; ?>" class="glyphicon-class"><?php echo $row['blog_likes']; ?> like</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="<?php echo "comment.php?blog_id=".$blog_id; ?>" ><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        <li>     
+                            <?php $url="comment.php?blog_id=".$blog_id."&random=".rand();?>                  
+                            <a href="<?php echo $url; ?>" > <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                                 <span class="glyphicon-class"><?php echo $comnum; ?> comment</span>
                             </a>
                         </li>
@@ -89,14 +89,10 @@
 
           <?php include "right.html"; ?>
 
-
         </div>
         <!-- row -->
     </div>
     <!-- container  -->
-
-  
-
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
