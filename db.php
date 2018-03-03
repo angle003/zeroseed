@@ -1,6 +1,5 @@
  <?php 
 
-
 //link db
 function conn(){
    $con=mysql_connect("localhost","root","123");
@@ -10,7 +9,16 @@ function conn(){
    mysql_select_db("zeroseed",$con);
    return $con;
 }
-   
+
+function  login($username,$password){
+    $con=conn();
+    $res=mysql_query("select * from user where user_name=${username} and user_password=${password}");
+    mysql_close($con);
+    return $res;
+}
+
+
+
 function getBlogById($id){ 
   $con=conn();
   $res=mysql_query("select * from blog where blog_id='".$id."'");
@@ -18,9 +26,24 @@ function getBlogById($id){
   return $res;  
 }
 
+function searchUserByName($username){
+  $con=conn();
+  $res=mysql_query("select count(*) from user where user_name='".$username."'");
+  $nums=mysql_fetch_row($res);
+  mysql_close($con);
+  return $nums[0];
+}
+
 function getBlogs(){
   $con=conn();
   $res=mysql_query("select * from blog");	
+  mysql_close($con);
+  return $res;
+}
+
+function getBlogsByUid($id){
+  $con=conn();
+  $res=mysql_query("select * from blog where  blog_user_id='".$id."'"); 
   mysql_close($con);
   return $res;
 }
@@ -79,5 +102,17 @@ function getCommentComsCount($id){
   mysql_close($con);
   return $nums[0];
 }
+
+// function addUser($username,$password,$email,$sex){
+//     $con=conn();
+//     mysql_query("insert into user(user_name,user_password) values ('".$username."','".$password."')");
+//     $res=mysql_query("select user_id from user where user_name='".$username."'");
+//     $user=mysql_fetch_array($res);
+//     $user_id=$user['user_id'];
+//     $res=mysql_query("insert into user_info(user_id,user_mail,user_sex) values('".$user_id."','".$email."','".$sex"')");
+//     mysql_close($con);
+//     return   true;
+// }
+
 ?>
    

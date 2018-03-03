@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <title>ZeroSeed</title>
     <meta name="keywords" content="ZEROSEED,ZERO'S WEB SITE ">
-    <meta name="description" content="Load successfully">
-    <meta name="author" content="">
+    <meta name="description" content="personal blog web site.">
+    <meta name="author" content="zero">
     <link rel="icon" href="favicon.ico">
-
     <link href="css/main.css" rel="stylesheet">
+
     <link href="css/comment.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
@@ -32,7 +32,7 @@
 
 <body>
     <!-- Fixed navbar -->
-    <?php include "top.html"; ?>
+    <?php include "top.php"; ?>
 
     <div class="container theme-showcase" role="main">
 
@@ -45,6 +45,7 @@
     $blog_id=$_GET['blog_id'];
     $blogs=getBlogById($blog_id);
     $blog=mysql_fetch_array($blogs);
+    $user_info=getUserinfoById($blog['blog_user_id']);
     $comnum=getCommentsByBlogId($blog_id);
     // $add=addLikesByBlogId($blog_id);
  ?>
@@ -60,8 +61,8 @@
                 <div class="blog-post">
 
                     <p><?php echo $blog['blog_content']; ?></p>
-                    <p class="blog-post-title"><a href="#">by Jessica</a><br>
-                        <span class="blog-post-meta ">January 1, 2017 </span>
+                    <p class="blog-post-title"><a href="#">by  <?php echo $user_info['user_info_nickname']; ?></a>
+                       
                     </p>
                     <ul class="glyphicons-list">
                         <li>
@@ -136,7 +137,7 @@
 <?php 
    } 
 } ?>
-         <a onclick="alert('ZeroSeed')">--</a>
+         <a  onclick="alert('ZeroSeed')">^-^</a>
             </div>
             <!-- /.blog-main -->
                 
@@ -149,10 +150,7 @@
 
 
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script >
-        window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>'); 
-    </script>
+   <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

@@ -1,9 +1,20 @@
 var xmlHttp
 
-function showWindow(){
-  alert("tips");
+function checkPass(password){
+    if(password.length >= 6){
+         return true;
+    }else{
+         return false;
+    }
 }
-
+function checkEmail(email){
+    var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+    if(regex.test(email)){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 function showResult1(id)
 {

@@ -12,6 +12,8 @@ a:visited {
     margin-right: 20px;
 }
 
+
+
 @media screen and (max-width: 450px) {
     .glyphicons-list {
         margin-top: -10px;
@@ -32,9 +34,9 @@ a:visited {
 .blog-post p img {
     border-radius: 50%;
     border: 1px solid wheat;
-margin-left:-10px;
-margin-right:10px;
-width: 48px;
-height: 48px;
+    margin-left:-10px;
+    margin-right:10px;
+    width: 48px;
+    height: 48px;
 }
 

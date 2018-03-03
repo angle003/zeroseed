@@ -1,20 +1,16 @@
 <?php
-$con=mysql_connect("localhost","root","123");
-if($con){
-  mysql_select_db("zeroseed",$con);
-} else{
-  die("connect mysql fail!");
-}
+include "db.php";
 $username=$_POST['username'];
 $password=$_POST['password'];
-$result=mysql_query("select * from user where user_name=${username} and user_password=${password}");
+$result=login($username,$password);
 if($row=mysql_fetch_array($result)){
-   echo $row['user_name']."-------".$row['user_password'];
-   echo "++++++++++++++";
-   echo "login  success";
+      session_start();
+      $user_info=getUserinfoById($row['user_id']);
+      $user_info['uid']=$row['user_id'];
+      $_SESSION['user_info']=$user_info;
+      echo "<script> alert('login success!'); window.location.href='index.php' </script>";
 }else{
-   echo "login fail";
+      echo "<script> alert('login fail');  window.location.href='index.php'</script>";
 }
 
-mysql_close($con);
 ?>

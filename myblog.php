@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,17 +39,20 @@
         <hr>
         <hr>
 
-        <div class="blog-header">
-            <h1 class="blog-title">最新动态</h1>
-            <p class="lead blog-description">展示最近的博文</p>
-        </div>
+       
 
         <div class="row">
 
             <div class="col-sm-8 blog-main">
 <?php
     include "db.php";
-    $result=getBlogs();
+    session_start();
+      if(isset($_SESSION['user_info'])){
+          $user=$_SESSION['user_info'];
+     }else{
+          $user=null;
+     } 
+    $result=getBlogsByUid($user['uid']);
     while ($row=mysql_fetch_array($result)) {
        $user_id=$row['blog_user_id'];
        $blog_id=$row['blog_id'];
@@ -62,6 +66,7 @@
                         <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_cretime']; ?> </span>
                     </p>
                     <p><?php echo $row['blog_content']; ?></p>
+                   
                     <ul class="glyphicons-list">
                         <li>
                             <a href="javascript:volid(0);" onclick="<?php echo "showResult1(".$blog_id.")"; ?>"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -92,7 +97,10 @@
     <!-- container  -->
 
     <!-- Placed at the end of the document so the pages load faster -->
-   <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <script>
+        window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+    </script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
