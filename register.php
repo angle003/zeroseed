@@ -39,7 +39,7 @@
         <div class="row">
 
             <div class="col-sm-8   well">
-                <form class="form-horizontal" action="addUser.php" >
+                <form class="form-horizontal" action="addUser.php"   method="post">
                       <div  id="user-success" class="form-group has-feedback">
                             <label for="inputUsername" class="col-sm-2 control-label">用户名</label>
                             <div class="col-sm-10">
@@ -73,10 +73,10 @@
                             <div class="col-sm-10">
                                 <div class="btn-group" data-toggle="buttons">
                                        <label  class="btn btn-default active">
-                                       <input  type="radio" name="sex">男
+                                       <input  type="radio" name="sex" value="1" checked="true">男
                                        </label>
                                        <label  class="btn btn-default">
-                                       <input  type="radio" name="sex">女
+                                       <input  type="radio" name="sex" value="0">女
                                        </label>
                                 </div>
                             </div>
@@ -114,15 +114,16 @@
                 $(this).popover({title:'用户名不能为空'});      
                 $(this).popover('show');
                 flag1=false;
+                return;
           }
        var cont=$(this).serialize();
        $.ajax({
           url:'ajax.php',
           type:'post',
-          dataType:'json',
+          // dataType:'json',
           data:cont,
           success:function(data){
-                 if(data.user==0){
+                 if(data == 0){
                         $("#user-success").removeClass("has-error").addClass("has-success");
                         $("#user-icon").removeClass("glyphicon-remove").addClass("glyphicon-ok");
                         $("#inputUsername").popover('destroy');

@@ -13,11 +13,8 @@
         echo $result;
     }  
     if($_POST['username']){
-        include "db.php";
         $username=$_POST['username'];
         $result=searchUserByName($username);
-        $json_arr = array("user"=>$result);
-        $json_obj = json_encode($json_arr);
-        echo $json_obj;
+        echo $result;
     }
 ?>

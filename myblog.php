@@ -46,7 +46,7 @@
             <div class="col-sm-8 blog-main">
 <?php
     include "db.php";
-    session_start();
+    // session_start();
       if(isset($_SESSION['user_info'])){
           $user=$_SESSION['user_info'];
      }else{
@@ -98,9 +98,7 @@
 
     <!-- Placed at the end of the document so the pages load faster -->
 
-    <script>
-        window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
-    </script>
+   <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

@@ -12,7 +12,7 @@ function conn(){
 
 function  login($username,$password){
     $con=conn();
-    $res=mysql_query("select * from user where user_name=${username} and user_password=${password}");
+    $res=mysql_query("select * from user where user_name='".$username."' and user_password='".$password."' ");
     mysql_close($con);
     return $res;
 }
@@ -103,16 +103,16 @@ function getCommentComsCount($id){
   return $nums[0];
 }
 
-// function addUser($username,$password,$email,$sex){
-//     $con=conn();
-//     mysql_query("insert into user(user_name,user_password) values ('".$username."','".$password."')");
-//     $res=mysql_query("select user_id from user where user_name='".$username."'");
-//     $user=mysql_fetch_array($res);
-//     $user_id=$user['user_id'];
-//     $res=mysql_query("insert into user_info(user_id,user_mail,user_sex) values('".$user_id."','".$email."','".$sex"')");
-//     mysql_close($con);
-//     return   true;
-// }
+function addUser($username,$password,$email,$sex){
+  $con=conn();
+  mysql_query("insert into user(user_name,user_password) values ('".$username."','".$password."')");
+  $res=mysql_query("select user_id from user where user_name='".$username."'");
+  $user=mysql_fetch_array($res);
+  $user_id=$user['user_id'];
+  $res=mysql_query("insert into user_info(user_id,user_mail,user_info_nickname,user_sex) values('".$user_id."','".$email."','".$username."','".$sex."')");
+  mysql_close($con);
+  return   true;
+}
 
 ?>
    
