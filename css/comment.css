@@ -1,0 +1,62 @@
+  .glyphicons-list-comment {
+            margin-top: 0;
+            list-style: none;
+            float: right;
+            margin-right: 20px;
+        }
+        
+        @media screen and (max-width: 450px) {
+            .glyphicons-list-comment {
+                margin-right: 0px;
+            }
+        }
+        
+        .glyphicons-list-comment li {
+            float: left;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        @media screen and (max-width: 450px) {
+            .glyphicons-list-comment li {
+                margin-right: 20px;
+            }
+        }
+        
+        .blog-post-comment p img {
+            border-radius: 50%;
+            border: 1px solid wheat;
+        }
+        
+        .blog-post-comment {
+            float: left;
+            margin-left: 60px;
+            width: 80%;
+            font-size: 10px;
+        }
+        
+        @media screen and (max-width: 450px) {
+            .blog-post-comment {
+                margin-left: 20px;
+                width: 97%;
+            }
+        }
+        
+        .blog-header {
+            width: 65%;
+            height: 100px;
+        }
+        
+        @media screen and (max-width: 450px) {
+            .blog-header {
+                width: 100%;
+                height: 100px;
+            }
+        }
+
+        .blog-post-title img{
+            margin-left:-10px;
+            margin-right:10px;
+            width: 48px;                    
+            height: 48px;
+        }
