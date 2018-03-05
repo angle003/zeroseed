@@ -15,11 +15,10 @@
    	    	     echo "<script> alert('success') </script>";
    	    	     echo "<script> window.location.href='index.php' </script>";
    	    }else{
-   	    	     echo "alert('fail')";
+   	    	     echo "<script> alert('fail') </script>";
    	    	     echo "<script> window.location.href='register.php' </script>";
    	    }
    }else{
          echo "<script> window.location.href='register.php' </script>";	
    }
-
 ?>

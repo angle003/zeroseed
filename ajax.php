@@ -17,4 +17,5 @@
         $result=searchUserByName($username);
         echo $result;
     }
+    
 ?>

@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,54 +37,41 @@
         
         <hr>
         <hr>
-
-       
-
-        <div class="row">
-
-            <div class="col-sm-8 blog-main">
-<?php
+<?php 
     include "db.php";
-    // session_start();
-     if(isset($_SESSION['user_info'])){
+    if(isset($_SESSION['user_info'])){
           $user=$_SESSION['user_info'];
      }else{
           $user=null;
      } 
-    $result=getBlogsByUid($user['uid']);
-    while ($row=mysql_fetch_array($result)) {
-       $user_id=$row['blog_user_id'];
-       $blog_id=$row['blog_id'];
-       $user_info=getUserinfoById($user_id);
-       $comnum=getCommentsByBlogId($blog_id);
 ?>
-   <div class="blog-post">
-                    <p class="blog-post-title" style=" position: relative;">
-                    <?php echo "<img src='".$user_info['user_image_url']."' />"; ?>      
-                        <a href="#" style="font-size: 2em;"><?php  echo $user_info['user_info_nickname']; ?></a><br>
-                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_cretime']; ?> </span>
-                    </p>
-                    <p><?php echo $row['blog_content']; ?></p>
-                   
-                    <ul class="glyphicons-list">
-                        <li>
-                            <a href="javascript:volid(0);" onclick="<?php echo "showResult1(".$blog_id.")"; ?>"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                <span id="<?php echo "blog_likes_".$blog_id; ?>" class="glyphicon-class"><?php echo $row['blog_likes']; ?> like</span>
-                            </a>
-                        </li>
-                        <li>     
-                            <?php $url="comment.php?blog_id=".$blog_id."&random=".rand();?>                  
-                            <a href="<?php echo $url; ?>" > <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                <span class="glyphicon-class"><?php echo $comnum; ?> comment</span>
-                            </a>
-                        </li>
-                    </ul>
-    </div>
-<?php 
-    } 
-?><!-- blog-post  -->
-              
-              
+        <div class="blog-header">
+            <h1 class="blog-title">-</h1>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-8 blog-main">
+                  <form class="form-horizontal " action="addblog.php"   method="post">
+                       <div  id="title" class="form-group">
+                            <label for="title" class="col-sm-2 control-label">标题</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="title"  autofocus  name="title">
+                            </div>
+                        </div>
+                        <div  id="content" class="form-group">
+                            <label for="content" class="col-sm-2 control-label">内容</label>
+                            <div class="col-sm-10">
+                                <textarea  class="form-control" id="content" name="content" rows="20"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                               <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">发送</button>
+                               </div>
+                        </div>
+                  </form> 
             </div>
             <!-- /.blog-main -->
 
@@ -97,7 +83,6 @@
     <!-- container  -->
 
     <!-- Placed at the end of the document so the pages load faster -->
-
    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>

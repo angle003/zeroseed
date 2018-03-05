@@ -38,33 +38,33 @@
 
         <div class="row">
 
-            <div class="col-sm-8   well">
-                <form class="form-horizontal" action="addUser.php"   method="post">
+            <div class="col-sm-8  well">
+                <form class="form-horizontal " action="addUser.php"   method="post">
                       <div  id="user-success" class="form-group has-feedback">
                             <label for="inputUsername" class="col-sm-2 control-label">用户名</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputUsername" placeholder="Username"  autofocus  data-container="body" data-toggle="popover" data-placement="auto" data-content="try again later!" name="username">
+                                <input type="text" class="form-control" id="inputUsername" placeholder="用户名"  autofocus  data-container="body" data-toggle="popover" data-placement="auto" data-content="try again later!" name="username">
                                 <span  id="user-icon" class="form-control-feedback glyphicon" aria-hidden="true"></span>
                             </div>
                       </div>
                       <div id="pass1-success" class="form-group has-feedback">
                             <label for="inputPassword1" class="col-sm-2 control-label">密码</label>
                             <div class="col-sm-10">
-                                 <input type="password" class="form-control" id="inputPassword1" placeholder="Password" name="password1" data-container="body" data-toggle="popover" data-placement="auto right" data-content="try again later!">
+                                 <input type="password" class="form-control" id="inputPassword1" placeholder="6位以上的密码" name="password1" data-container="body" data-toggle="popover" data-placement="auto right" data-content="try again later!">
                                  <span  id="pass1-icon" class="form-control-feedback glyphicon" aria-hidden="true"></span>
                             </div>
                       </div>
                        <div id="pass2-success"  class="form-group has-feedback">
                             <label for="inputPassword2" class="col-sm-2 control-label">确认密码</label>
                             <div class="col-sm-10">
-                                 <input type="password" class="form-control" id="inputPassword2" placeholder="Password" name="password2" data-container="body" data-toggle="popover" data-placement="auto right" data-content="try again later!">
+                                 <input type="password" class="form-control" id="inputPassword2" placeholder="确认密码" name="password2" data-container="body" data-toggle="popover" data-placement="auto right" data-content="try again later!">
                                  <span  id="pass2-icon" class="form-control-feedback glyphicon" aria-hidden="true"></span>
                             </div>
                       </div>
                       <div id="email-success"  class="form-group has-feedback">
                             <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
                             <div class="col-sm-10">
-                                 <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="email" data-container="body" data-toggle="popover" data-placement="auto right" data-content="try again later!">
+                                 <input type="email" class="form-control" id="inputEmail" placeholder="邮箱" name="email" data-container="body" data-toggle="popover" data-placement="auto right" data-content="try again later!">
                                  <span  id="email-icon" class="form-control-feedback glyphicon" aria-hidden="true"></span>
                             </div>
                       </div>
@@ -73,10 +73,10 @@
                             <div class="col-sm-10">
                                 <div class="btn-group" data-toggle="buttons">
                                        <label  class="btn btn-default active">
-                                       <input  type="radio" name="sex" value="1" checked="true">男
+                                       <input  type="radio" name="sex" value="1" checked="true"><img src="images/man.png" style="width: 15px;height: 15px;">
                                        </label>
                                        <label  class="btn btn-default">
-                                       <input  type="radio" name="sex" value="0">女
+                                       <input  type="radio" name="sex" value="0"><img src="images/women.png" style="width: 10px;height: 15px;margin-left:2px;margin-right: 3px;">
                                        </label>
                                 </div>
                             </div>
@@ -120,7 +120,6 @@
        $.ajax({
           url:'ajax.php',
           type:'post',
-          // dataType:'json',
           data:cont,
           success:function(data){
                  if(data == 0){
@@ -201,7 +200,7 @@
     });
     $("#submit").click(function(){
          if(flag1&&flag2&&flag3&&flag4){
-             $(".form-horizontal").submit();
+                $(".form-horizontal").submit();
          }else{
              alert("fail");
          }

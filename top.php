@@ -27,7 +27,7 @@
                 <ul class="nav navbar-nav">
                     <li  class="active"  ><a href="index.php">Home</a></li>
                     <li><a href="myblog.php">My Blog</a></li>
-                    <li><a href="register.php">Write Blog</a></li>
+                    <li><a href="blog.php">Write Blog</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
                         <ul class="dropdown-menu">

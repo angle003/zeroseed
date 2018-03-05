@@ -27,12 +27,18 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
-   
 </head>
 
 <body>
     <!-- Fixed navbar -->
-    <?php include "top.php"; ?>
+<?php 
+    include "top.php"; 
+    if(isset($_SESSION['user_info'])){
+        $user=$_SESSION['user_info'];
+    }else{
+        $user=null;
+    } 
+?>
 
     <div class="container theme-showcase" role="main">
 
@@ -82,6 +88,22 @@
                 <hr>
 
 
+                <form  id="blog_comment" class="form-horizontal" >
+                        <div class="form-group comment">
+                            <label for="content" class="col-sm-2 control-label">
+                                    <img src="<?php if($user){ echo $user['user_image_url']; }else{ echo 'https://static.hdslb.com/images/akari.jpg';} ?>" >
+                            </label>
+                            <div class="col-sm-10">
+                                <textarea  class="form-control" id="comment" name="comment" rows="4"></textarea>     
+                                <input type="text" name="blog_id" value="<?php echo $blog_id; ?>" style="display: none;" >       
+                            </div>
+                        </div>
+                </form> 
+                 <div class="col-lg-offset-11  col-sm-offset-10  col-xs-offset-9  col-xs-3  col-sm-2  col-lg-1">
+                         <button id="send"  class="btn btn-primary">发送</button>
+                 </div>
+
+
 <?php  
      $res=getCommentByBlogId($blog_id);
      while ($row=mysql_fetch_array($res)) {
@@ -91,8 +113,7 @@
 ?>
                 <div class="blog-post-comment">
                     <p class="blog-post-title" style=" position: relative;">
-                        <?php echo "<img src='".$user_info['user_image_url']."' />"; ?>
-                       
+                        <?php echo "<img src='".$user_info['user_image_url']."' />"; ?>     
                                 <a href="#" style="font-size: 2em;"><?php echo $user_info['user_info_nickname']; ?></a><br>
                         <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_comment_cretime']; ?></span>
                     </p>
@@ -104,12 +125,25 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                        <span class="glyphicon-class"><?php echo $comments; ?> comment</span>
+                            <a href="javascript:void(0);" onclick="<?php echo 'showDilog('.$comment_id.')'?>"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                        <span class="glyphicon-class"><?php echo $comments; ?> 回复</span>
                             </a>
-                        </li>
+                        </li>                   
                     </ul>
+                     <form  action="addCommentComs.php" method="post" id="<?php echo 'commentComs'.$comment_id;?>"  class="form-horizontal"  style="display: none;">
+                        <div class="form-group">                          
+                            <div class="col-sm-12">
+                                <textarea  class="form-control" id="commentComs" name="commentComs" rows="4"></textarea>                            
+                            </div>
+                        </div>
+                         <div class="form-group">                          
+                            <div class="col-sm-12">                    
+                                <button id="sendComs"  class="btn btn-primary" style="float: right;">发送</button>                        
+                            </div>
+                        </div>
+                      </form> 
                 </div>
+               
                 <!-- /.blog-post-comment -->
 <?php
     $comment_coms=getCommentComs($comment_id);
@@ -119,8 +153,7 @@
 ?>
  <div class="blog-post-comment"  >
                     <p class="blog-post-title" style="position: relative;margin-left: 20px;">
-                        <?php echo "<img src='".$com_user_info['user_image_url']."' />"; ?>
-                       
+                        <?php echo "<img src='".$com_user_info['user_image_url']."' />"; ?>                 
                                 <a href="#" style="font-size: 2em;"><?php echo $com_user_info['user_info_nickname']; ?></a><br>
                         <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $ro['blog_comment_cretime']; ?></span>
                     </p>
@@ -132,15 +165,17 @@
                             </a>
                         </li>
                     </ul>
-                </div>
+ </div>
 
 <?php 
    } 
 } ?>
+
          <a  onclick="alert('ZeroSeed')">^-^</a>
-            </div>
+            
             <!-- /.blog-main -->
-                
+    </div>  
+
             <?php include "right.html"; ?>
             <!-- /.blog-sidebar -->
         </div>
@@ -151,6 +186,44 @@
 
     <!-- Placed at the end of the document so the pages load faster -->
    <script type="text/javascript" src="js/jquery.min.js"></script>
+   <script type="text/javascript">
+       function showDilog(id){
+           $("#commentComs"+id).fadeToggle();
+       }
+       $("#comment").focus(function(){
+            if(<?php if($user){echo "true";}else{echo "false";}; ?>){ 
+                     $(this).css({"backgroundColor":"#F3F3F3"});
+            }else{
+                 alert("请先登录!");
+                 $(this).blur();
+            }
+       });
+       $("#comment").blur(function(){
+            $(this).css({"backgroundColor":"white"});
+       });
+       $("#send").click(function(){
+             var data= $("#blog_comment").serialize();      
+             if(comment == ""){
+                  alert("内容不能为空！");
+             }else{
+                     $.ajax({
+                            url:'addComment.php',
+                            type:'post',
+                            data:data,
+                            success:function(data){
+                                if(data == 1){
+                                    window.location.href='comment.php?blog_id=<?php echo $blog_id; ?>'; 
+                                }else if(data == 2){
+                                    alert("评论失败");
+                                }else{
+                                    alert("评论不能为空");
+                                }
+                                
+                            }
+                     });
+            }
+       });
+   </script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

@@ -17,8 +17,6 @@ function  login($username,$password){
     return $res;
 }
 
-
-
 function getBlogById($id){ 
   $con=conn();
   $res=mysql_query("select * from blog where blog_id='".$id."'");
@@ -36,14 +34,15 @@ function searchUserByName($username){
 
 function getBlogs(){
   $con=conn();
-  $res=mysql_query("select * from blog");	
+
+  $res=mysql_query("select * from blog order by  blog.blog_cretime desc");	
   mysql_close($con);
   return $res;
 }
 
 function getBlogsByUid($id){
   $con=conn();
-  $res=mysql_query("select * from blog where  blog_user_id='".$id."'"); 
+  $res=mysql_query("select * from blog where  blog_user_id='".$id."' order by  blog.blog_cretime desc"); 
   mysql_close($con);
   return $res;
 }
@@ -80,6 +79,7 @@ function  addLikesByBlogId($id){
   mysql_close($con);
   return $nums[0];
 }
+
 function  addLikesByCommentId($id){
   $con=conn();
   $res=mysql_query("select blog_comment_likes from blog_comment where blog_comment_id ='".$id."'");
@@ -89,12 +89,14 @@ function  addLikesByCommentId($id){
   mysql_close($con);
   return $nums[0];
 }
+
 function getCommentComs($id){
   $con=conn();
   $res=mysql_query("select * from  blog_comment where blog_comment_reply='".$id."'");
   mysql_close($con);
   return $res;
 }
+
 function getCommentComsCount($id){
   $con=conn();
   $res=mysql_query("select count(*) from  blog_comment where blog_comment_reply='".$id."'");
@@ -112,6 +114,28 @@ function addUser($username,$password,$email,$sex){
   $res=mysql_query("insert into user_info(user_id,user_mail,user_info_nickname,user_sex) values('".$user_id."','".$email."','".$username."','".$sex."')");
   mysql_close($con);
   return   true;
+}
+
+function  addBlog($uid,$title,$content){
+  $con=conn();
+  $res=mysql_query("insert into blog(blog_user_id,blog_title,blog_content) values('".$uid."','".$title."','".$content."')");
+  mysql_close($con);
+  if($res > 0){
+       return true;
+  }else{
+       return false;
+  }
+}
+
+function addBlogComment($uid,$comment,$blog_id){
+  $con=conn();
+  $res=mysql_query("insert into blog_comment(bolg_comment_uid,blog_comment_content,blog_id) values('".$uid."','".$comment."','".$blog_id."')");
+  mysql_close($con);
+  if($res > 0){
+       return true;
+  }else{
+       return false;
+  }
 }
 
 ?>
