@@ -22,13 +22,12 @@
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
-     <script src="js/ajax.js"></script>
+    <script src="js/ajax.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
+    <![endif]-->
 </head>
-
 <body>
     <!-- Fixed navbar -->
 <?php 
@@ -39,11 +38,8 @@
         $user=null;
     } 
 ?>
-
     <div class="container theme-showcase" role="main">
-
         <!-- Main jumbotron for a primary marketing message or call to action -->
-
         <hr>
         <hr>
 <?php
@@ -59,16 +55,11 @@
             <h1 class="blog-title text-center"><?php echo $blog['blog_title']; ?></h1>
             <p class="lead blog-description text-center"><?php echo $blog['blog_cretime']; ?></p>
         </div>
-
         <div class="row">
-
             <div class="col-sm-8 blog-main">
-
                 <div class="blog-post">
-
                     <p><?php echo $blog['blog_content']; ?></p>
                     <p class="blog-post-title"><a href="#">by  <?php echo $user_info['user_info_nickname']; ?></a>
-                       
                     </p>
                     <ul class="glyphicons-list">
                         <li>
@@ -86,8 +77,6 @@
                 <!-- /.blog-post -->
                 <h2>comments</h2>
                 <hr>
-
-
                 <form  id="blog_comment" class="form-horizontal" >
                         <div class="form-group comment">
                             <label for="content" class="col-sm-2 control-label">
@@ -102,19 +91,18 @@
                  <div class="col-lg-offset-11  col-sm-offset-10  col-xs-offset-9  col-xs-3  col-sm-2  col-lg-1">
                          <button id="send"  class="btn btn-primary">发送</button>
                  </div>
-
-
 <?php  
      $res=getCommentByBlogId($blog_id);
      while ($row=mysql_fetch_array($res)) {
-        $user_info=getUserinfoById($row['bolg_comment_uid']);
+        $reUid=$row['bolg_comment_uid'];
+        $user_info_coms=getUserinfoById($reUid);
         $comment_id=$row['blog_comment_id'];
         $comments=getCommentComsCount($comment_id);
 ?>
                 <div class="blog-post-comment">
                     <p class="blog-post-title" style=" position: relative;">
-                        <?php echo "<img src='".$user_info['user_image_url']."' />"; ?>     
-                                <a href="#" style="font-size: 2em;"><?php echo $user_info['user_info_nickname']; ?></a><br>
+                        <?php echo "<img src='".$user_info_coms['user_image_url']."' />"; ?>     
+                                <a href="#" style="font-size: 2em;"><?php echo $user_info_coms['user_info_nickname']; ?></a><br>
                         <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_comment_cretime']; ?></span>
                     </p>
                     <p><?php echo $row['blog_comment_content']; ?></p>
@@ -130,10 +118,12 @@
                             </a>
                         </li>                   
                     </ul>
-                     <form  action="addCommentComs.php" method="post" id="<?php echo 'commentComs'.$comment_id;?>"  class="form-horizontal"  style="display: none;">
+                     <form  action="addCommentComs.php" method="post" id="<?php echo 'commentComs'.$comment_id;?>"  class="form-horizontal"  style="display: none;" onSubmit="<?php echo 'return confirm('.$comment_id.')';?>" >
                         <div class="form-group">                          
                             <div class="col-sm-12">
-                                <textarea  class="form-control" id="commentComs" name="commentComs" rows="4"></textarea>                            
+                                <textarea  class="form-control commentComs"  id="<?php echo 'commentCont'.$comment_id;?>"  name="commentComs" rows="4"></textarea>         
+                                <input type="text" name="blog_id" value="<?php echo $blog_id; ?>" style="display: none;" >     
+                                <input type="text" name="comment_id" value="<?php echo $comment_id; ?>" style="display: none;">          <input type="text" name="reUid" value="<?php echo $reUid; ?>" style="display: none;">
                             </div>
                         </div>
                          <div class="form-group">                          
@@ -143,7 +133,6 @@
                         </div>
                       </form> 
                 </div>
-               
                 <!-- /.blog-post-comment -->
 <?php
     $comment_coms=getCommentComs($comment_id);
@@ -157,7 +146,7 @@
                                 <a href="#" style="font-size: 2em;"><?php echo $com_user_info['user_info_nickname']; ?></a><br>
                         <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $ro['blog_comment_cretime']; ?></span>
                     </p>
-                    <p style="margin-left: 20px;"><?php echo $row['blog_comment_content']; ?></p>
+                    <p style="margin-left: 20px;"><?php echo $ro['blog_comment_content']; ?></p>
                     <ul class="glyphicons-list-comment" style="margin-right: 200px;" ontouch="showWindow()">
                         <li>
                             <a  href="javascript:void(0);" onclick="<?php echo "show(".$com_comment_id.")"; ?>"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -188,8 +177,25 @@
    <script type="text/javascript" src="js/jquery.min.js"></script>
    <script type="text/javascript">
        function showDilog(id){
-           $("#commentComs"+id).fadeToggle();
+           $("#commentComs"+id).fadeToggle();  
        }
+       function confirm(id){
+           var cont=$("#commentCont"+id).val();
+           if(cont == ""){
+                 alert("内容不能为空！");
+                 return false;
+           }else{
+                 return true;
+           }
+       }
+       $(".commentComs").focus(function(){
+              if(<?php if($user){echo "true";}else{echo "false";}; ?>){ 
+                     $(this).css({"backgroundColor":"#F3F3F3"});
+              }else{
+                 alert("请先登录!");
+                 $(this).blur();
+              }
+        });
        $("#comment").focus(function(){
             if(<?php if($user){echo "true";}else{echo "false";}; ?>){ 
                      $(this).css({"backgroundColor":"#F3F3F3"});
@@ -198,6 +204,7 @@
                  $(this).blur();
             }
        });
+
        $("#comment").blur(function(){
             $(this).css({"backgroundColor":"white"});
        });

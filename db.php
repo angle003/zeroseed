@@ -65,7 +65,7 @@ function getCommentsByBlogId($id){
 
 function getCommentByBlogId($id){
   $con=conn();
-  $res=mysql_query("select * from blog_comment where blog_id='".$id."'");
+  $res=mysql_query("select * from blog_comment where blog_id='".$id."' ORDER BY  blog_comment.blog_comment_cretime DESC ");
   mysql_close($con);
   return $res;
 }
@@ -138,5 +138,14 @@ function addBlogComment($uid,$comment,$blog_id){
   }
 }
 
+function addCommentComs($uid,$comment_id,$commentComs,$reUid){
+  $con=conn();
+  $res=mysql_query("insert into blog_comment(bolg_comment_uid,blog_comment_content,blog_comment_reply,blog_comment_reUid) values('".$uid."','".$commentComs."','".$comment_id."','".$reUid."')");
+  mysql_close($con);
+  if($res>0){
+      return true;
+  }else{
+      return false;
+  }
+}
 ?>
-   
