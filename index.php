@@ -54,6 +54,10 @@
        $blog_id=$row['blog_id'];
        $user_info=getUserinfoById($user_id);
        $comnum=getCommentsByBlogId($blog_id);
+       $content=$row['blog_content'];
+       if(strlen($content) >= 460){
+            $content = substr($content,0,460)."..."; 
+       }
 ?>
    <div class="blog-post">
                     <p class="blog-post-title" style=" position: relative;">
@@ -61,7 +65,7 @@
                         <a href="#" style="font-size: 2em;"><?php  echo $user_info['user_info_nickname']; ?></a><br>
                         <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_cretime']; ?> </span>
                     </p>
-                    <p><?php echo $row['blog_content']; ?></p>
+                    <p><?php echo $content; ?></p>
                     <ul class="glyphicons-list">
                         <li>
                             <a href="javascript:volid(0);" onclick="<?php echo "showResult1(".$blog_id.")"; ?>"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>

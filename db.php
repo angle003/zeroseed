@@ -148,4 +148,14 @@ function addCommentComs($uid,$comment_id,$commentComs,$reUid){
       return false;
   }
 }
+
+function updateUserInfo($uid,$nickname,$email,$age,$sex,$introduce){
+  $con=conn();
+  $res=mysql_query("update user_info set user_info_nickname='".$nickname."',user_sex='".$sex."',user_age='".$age."',user_mail='".$email."',user_introduce='".$introduce."' where user_id='".$uid."'");
+  if($res>0){
+      return true;
+  }else{
+      return false;
+  }
+}
 ?>

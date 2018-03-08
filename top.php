@@ -14,6 +14,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
                     <img style="margin-top:-20%;width: 40px;height: 40px;border-radius: 50%;" 
@@ -23,11 +24,15 @@
                     <?php  if($user){ echo $user['user_info_nickname']; }else{  echo "游客"; } ?>         
                 </a>
             </div>
+         
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li  class="active"  ><a href="index.php">Home</a></li>
+                    <?php    if($user){  ?>
                     <li><a href="myblog.php">My Blog</a></li>
                     <li><a href="blog.php">Write Blog</a></li>
+                    <li><a href="my.php">My</a></li>
+                    <?php  }  ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -43,6 +48,7 @@
                 </ul>
             </div>
             <!--/.nav-collapse -->
+         
         </div>
     </nav>
 

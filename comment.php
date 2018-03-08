@@ -83,8 +83,8 @@
                                     <img src="<?php if($user){ echo $user['user_image_url']; }else{ echo 'https://static.hdslb.com/images/akari.jpg';} ?>" >
                             </label>
                             <div class="col-sm-10">
-                                <textarea  class="form-control" id="comment" name="comment" rows="4"></textarea>     
-                                <input type="text" name="blog_id" value="<?php echo $blog_id; ?>" style="display: none;" >       
+                                <textarea  class="form-control" id="comment" name="comment" rows="4"></textarea>
+                                <input type="text" name="blog_id" value="<?php echo $blog_id; ?>" style="display: none;" >
                             </div>
                         </div>
                 </form> 
@@ -116,18 +116,18 @@
                             <a href="javascript:void(0);" onclick="<?php echo 'showDilog('.$comment_id.')'?>"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                                         <span class="glyphicon-class"><?php echo $comments; ?> 回复</span>
                             </a>
-                        </li>                   
+                        </li>
                     </ul>
                      <form  action="addCommentComs.php" method="post" id="<?php echo 'commentComs'.$comment_id;?>"  class="form-horizontal"  style="display: none;" onSubmit="<?php echo 'return confirm('.$comment_id.')';?>" >
-                        <div class="form-group">                          
+                        <div class="form-group">
                             <div class="col-sm-12">
-                                <textarea  class="form-control commentComs"  id="<?php echo 'commentCont'.$comment_id;?>"  name="commentComs" rows="4"></textarea>         
+                                <textarea  class="form-control commentComs"  id="<?php echo 'commentCont'.$comment_id;?>"  name="commentComs" rows="4"></textarea>
                                 <input type="text" name="blog_id" value="<?php echo $blog_id; ?>" style="display: none;" >     
                                 <input type="text" name="comment_id" value="<?php echo $comment_id; ?>" style="display: none;">          <input type="text" name="reUid" value="<?php echo $reUid; ?>" style="display: none;">
                             </div>
                         </div>
-                         <div class="form-group">                          
-                            <div class="col-sm-12">                    
+                         <div class="form-group">
+                            <div class="col-sm-12">
                                 <button id="sendComs"  class="btn btn-primary" style="float: right;">发送</button>                        
                             </div>
                         </div>
@@ -155,23 +155,18 @@
                         </li>
                     </ul>
  </div>
-
 <?php 
    } 
 } ?>
-
          <a  onclick="alert('ZeroSeed')">^-^</a>
-            
             <!-- /.blog-main -->
     </div>  
-
             <?php include "right.html"; ?>
             <!-- /.blog-sidebar -->
         </div>
         <!-- row -->
     </div>
     <!-- container  -->
-
 
     <!-- Placed at the end of the document so the pages load faster -->
    <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -209,7 +204,7 @@
             $(this).css({"backgroundColor":"white"});
        });
        $("#send").click(function(){
-             var data= $("#blog_comment").serialize();      
+             var data= $("#blog_comment").serialize();
              if(comment == ""){
                   alert("内容不能为空！");
              }else{
@@ -228,7 +223,7 @@
                                 
                             }
                      });
-            }
+             }
        });
    </script>
     <script src="js/bootstrap.min.js"></script>
