@@ -40,3 +40,15 @@ a:visited {
     height: 48px;
 }
 
+#information{
+    position: absolute;
+    top: 51px;
+    right: -80px; 
+    width: 200px;
+    height: 200px;
+    background-color: pink;
+    overflow: hidden;
+}
+#a-information:hover .information{
+   display: block;
+}

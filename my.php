@@ -24,6 +24,17 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+     <style type="text/css">
+          .btn-circle {  
+            width: 25px;  
+            height: 25px;  
+            text-align: center;  
+            padding: 4px 0;  
+            font-size: 12px;  
+            line-height: 1.428571429;  
+            border-radius: 15px;  
+         }  
+      </style>
 </head>
 
 <body>
@@ -52,20 +63,15 @@
     ?>
 
     <div class="container theme-showcase" role="main">
-
         <!-- Main jumbotron for a primary marketing message or call to action -->
-        
         <hr>
         <hr>
-
         <div class="blog-header">
             <h1 class="blog-title"><?php echo $nickname;?> </h1>
             <p class="lead blog-description">个人中心</p>
         </div>
-
         <div class="row">
             <div class="col-sm-8 blog-main">
-
                <form  class="form-horizontal"   action="updateUserInfo.php" method="post" >
                         <input type="text" name="image"  value="<?php echo $user_image; ?>"  style="display: none;">
                         <input type="text" name="uid"  value="<?php echo $user['uid']; ?>"  style="display: none;">

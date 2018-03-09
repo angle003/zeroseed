@@ -26,7 +26,7 @@
             </div>
          
             <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav"  style="position: relative;">
                     <li  class="active"  ><a href="index.php">Home</a></li>
                     <?php    if($user){  ?>
                     <li><a href="myblog.php">My Blog</a></li>
@@ -45,6 +45,14 @@
                             <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
+                    <?php    if($user){  ?>
+                     <li ><a   id="a-information" href="#">动态</a>
+                          <button type="button" class="btn btn-danger btn-circle"  style="position: absolute;z-index: 1000; right: -5px;top: 2px;">28</button>
+                          <div class="information"  style="position: absolute;display: none;">
+                               <p>dasdasdasd</p>
+                          </div>
+                     </li>
+                    <?php  }  ?>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -52,32 +60,31 @@
         </div>
     </nav>
 
-
+<script type="text/javascript">
+    
 </script>
-
       <!--弹窗 -->
     <div class="modal fade" id="exModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">login in</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">登录 zeroseed 博客</h4>
                 </div>
                 <form  action="login.php" method="post">
                 <div class="modal-body">
-                    
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">username:</label>
+                            <label for="recipient-name" class="control-label">用户名:</label>
                             <input type="text" class="form-control" name="username" >
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="control-label">password:</label>
+                            <label for="message-text" class="control-label">密码:</label>
                             <input type="password" class="form-control" name="password" >
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">login</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">登录</button>
                 </div>
               </form>
             </div>

@@ -24,7 +24,17 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
-
+      <style type="text/css">
+          .btn-circle {  
+            width: 25px;  
+            height: 25px;  
+            text-align: center;  
+            padding: 4px 0;  
+            font-size: 12px;  
+            line-height: 1.428571429;  
+            border-radius: 15px;  
+         }  
+      </style>
 </head>
 
 <body>
@@ -41,6 +51,7 @@
         <div class="blog-header">
             <h1 class="blog-title">最新动态</h1>
             <p class="lead blog-description">展示最近的博文</p>
+           
         </div>
 
         <div class="row">
@@ -82,9 +93,7 @@
     </div>
 <?php 
     } 
-?><!-- blog-post  -->
-              
-              
+?><!-- blog-post  -->  
             </div>
             <!-- /.blog-main -->
 

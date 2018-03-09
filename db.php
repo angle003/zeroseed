@@ -34,7 +34,6 @@ function searchUserByName($username){
 
 function getBlogs(){
   $con=conn();
-
   $res=mysql_query("select * from blog order by  blog.blog_cretime desc");	
   mysql_close($con);
   return $res;
@@ -152,10 +151,12 @@ function addCommentComs($uid,$comment_id,$commentComs,$reUid){
 function updateUserInfo($uid,$nickname,$email,$age,$sex,$introduce){
   $con=conn();
   $res=mysql_query("update user_info set user_info_nickname='".$nickname."',user_sex='".$sex."',user_age='".$age."',user_mail='".$email."',user_introduce='".$introduce."' where user_id='".$uid."'");
+  mysql_close($con);
   if($res>0){
       return true;
   }else{
       return false;
   }
 }
+
 ?>

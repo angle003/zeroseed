@@ -8,7 +8,7 @@ if($row=mysql_fetch_array($result)){
       $user_info=getUserinfoById($row['user_id']);
       $user_info['uid']=$row['user_id'];
       $_SESSION['user_info']=$user_info;
-      echo "<script> alert('login success!'); window.location.href='index.php' </script>";
+      echo "<script> window.location.href='index.php' </script>";
 }else{
       echo "<script> alert('login fail');  window.location.href='index.php'</script>";
 }
