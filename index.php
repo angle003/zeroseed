@@ -10,7 +10,7 @@
     <meta name="author" content="zero">
     <link rel="icon" href="favicon.ico">
     <link href="css/main.css" rel="stylesheet">
-
+    <link href="css/animate.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->

@@ -25,10 +25,10 @@
                 </a>
             </div>
          
-            <div id="navbar" class="navbar-collapse collapse">
+            <div id="navbar" class="navbar-collapse collapse" >
                 <ul class="nav navbar-nav"  style="position: relative;">
                     <li  class="active"  ><a href="index.php">Home</a></li>
-                    <?php    if($user){  ?>
+                    <?php  if($user){  ?>
                     <li><a href="myblog.php">My Blog</a></li>
                     <li><a href="blog.php">Write Blog</a></li>
                     <li><a href="my.php">My</a></li>
@@ -45,14 +45,18 @@
                             <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
-                    <?php  if($user){  ?>
+                    <?php if($user){  ?>
                      <li>
-                         <a  href="#">动态</a>
+                          <a href="#" id="atou" >动态</a>
                           <span id="tou" >
-                              <button type="button" class="btn btn-danger btn-circle" >28</button>
-                              <span class="animated slideInLeft"  >
-                                   <p>ASDASDASDASD</p>
-                              </span> 
+                             <button type="button" class="btn btn-danger btn-circle" >1</button>
+                             <span  class="animated fadeIn">
+                             <div class="information" > <a href="#"> asdasd </a></div>
+                             <div class="information" > <a href="#">邮箱：</a></div>
+                             <div class="information" > <a href="#">空间</a></div>
+                             <div class="information" > <a href="#">积分：10</a></div>
+                             <div class="information" > <a href="#"> 大会员</a></div>
+                             </span> 
                           </span>
                      </li>
                     <?php  }  ?>
@@ -62,10 +66,35 @@
          
         </div>
     </nav>
-
-<script type="text/javascript">
     
+<script type="text/javascript">
+  var ds =document.getElementsByClassName("information");
+  var oldColor;
+      for(var i=0;i<ds.length;i++){
+          if(i%2==0){
+                 ds[i].style.backgroundColor='rgba('+0+','+0+','+ 0+','+0.1+')';
+                 ds[i].onmouseover=function(){
+                 oldColor=this.style.backgroundColor;
+                 this.style.backgroundColor='rgba('+0+','+0+','+ 0+','+0.3+')';
+                };
+          }else{
+                 ds[i].style.backgroundColor='rgba('+0+','+0+','+ 0+','+0.3+')';
+                 ds[i].onmouseover=function(){
+                 oldColor=this.style.backgroundColor;
+                 this.style.backgroundColor='rgba('+0+','+0+','+ 0+','+0.3+')';};            
+          }        
+         ds[i].onmouseout=function(){
+         this.style.backgroundColor=oldColor;
+         };
+      }
 </script>
+
+
+
+
+
+
+
       <!--弹窗 -->
     <div class="modal fade" id="exModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">

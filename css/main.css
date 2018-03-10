@@ -52,28 +52,44 @@ a:visited {
 
 #tou{
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     top: 0px;
-    right: 0px;
 }
 #tou span{
     position: absolute;
     top: 51px;
-    right: -80px; 
-    background-color: pink;
+    right: -50px; 
+    background-color: #2B2B2B;
     display: none;
 }
 #tou button{
     position: absolute;
     z-index: 1000;
-    right: -5px;
+    right: 18px;
     top: 2px;
 }
-#tou:hover span{
-    display: block;
-    width: 200px;
-    height: 200px;
+@media screen and (max-width: 450px) {
+    #tou button{
+    display: none;
+   }
 }
 
+#tou:hover span{
+    display: block;
+}
+.information{
+    text-align: center;
+    width: 200px;
+    height: 30px;
+}
+.information:hover{
+    border: 1px solid #666666;
+    border-left-width: 5px;
+    box-shadow: 2px 2px #666666;
+}
+.information a{
+    text-decoration: none;
+    color: white;
+}
 
