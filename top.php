@@ -45,12 +45,15 @@
                             <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
-                    <?php    if($user){  ?>
-                     <li ><a   id="a-information" href="#">动态</a>
-                          <button type="button" class="btn btn-danger btn-circle"  style="position: absolute;z-index: 1000; right: -5px;top: 2px;">28</button>
-                          <div class="information"  style="position: absolute;display: none;">
-                               <p>dasdasdasd</p>
-                          </div>
+                    <?php  if($user){  ?>
+                     <li>
+                         <a  href="#">动态</a>
+                          <span id="tou" >
+                              <button type="button" class="btn btn-danger btn-circle" >28</button>
+                              <span class="animated slideInLeft"  >
+                                   <p>ASDASDASDASD</p>
+                              </span> 
+                          </span>
                      </li>
                     <?php  }  ?>
                 </ul>
