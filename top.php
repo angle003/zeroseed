@@ -1,4 +1,5 @@
 <?php
+     include "db.php";
      session_start();
       if(isset($_SESSION['user_info'])){
           $user=$_SESSION['user_info'];
@@ -45,17 +46,20 @@
                             <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
-                    <?php if($user){  ?>
+                    <?php if($user){   $messages=getMessagesCount($user['uid']);   ?>
                      <li>
                           <a href="#" id="atou" >动态</a>
                           <span id="tou" >
-                             <button type="button" class="btn btn-danger btn-circle" >1</button>
+                             <button type="button" class="btn btn-danger btn-circle" ><?php echo $messages;?></button>
                              <span  class="animated fadeIn">
-                             <div class="information" > <a href="#"> asdasd </a></div>
-                             <div class="information" > <a href="#">邮箱：</a></div>
-                             <div class="information" > <a href="#">空间</a></div>
-                             <div class="information" > <a href="#">积分：10</a></div>
-                             <div class="information" > <a href="#"> 大会员</a></div>
+                                   <?php  
+                                         $result=getMessageByUid($user['uid']);
+                                         while ($row_m=mysql_fetch_array($result)) {
+                                                $cont=$row_m['user_message_content'];
+                                                $url=$row_m['user_message_url'];
+                                                echo " <div class='information' > <a href='".$url."'>".$cont."</a></div>";
+                                         }
+                                   ?>
                              </span> 
                           </span>
                      </li>
@@ -75,25 +79,19 @@
                  ds[i].style.backgroundColor='rgba('+0+','+0+','+ 0+','+0.1+')';
                  ds[i].onmouseover=function(){
                  oldColor=this.style.backgroundColor;
-                 this.style.backgroundColor='rgba('+0+','+0+','+ 0+','+0.3+')';
+                 this.style.backgroundColor='rgba('+42+','+100+','+151+','+1+')';
                 };
           }else{
                  ds[i].style.backgroundColor='rgba('+0+','+0+','+ 0+','+0.3+')';
                  ds[i].onmouseover=function(){
                  oldColor=this.style.backgroundColor;
-                 this.style.backgroundColor='rgba('+0+','+0+','+ 0+','+0.3+')';};            
+                 this.style.backgroundColor='rgba('+42+','+100+','+151+','+1+')';};            
           }        
          ds[i].onmouseout=function(){
          this.style.backgroundColor=oldColor;
          };
       }
 </script>
-
-
-
-
-
-
 
       <!--弹窗 -->
     <div class="modal fade" id="exModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">

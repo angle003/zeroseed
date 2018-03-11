@@ -12,8 +12,6 @@ a:visited {
     margin-right: 20px;
 }
 
-
-
 @media screen and (max-width: 450px) {
     .glyphicons-list {
         margin-top: -10px;
@@ -39,16 +37,6 @@ a:visited {
     width: 48px;
     height: 48px;
 }
-#information{
-    position: absolute;
-    top: 51px;
-    right: -80px; 
-    width: 200px;
-    height: 200px;
-    background-color: pink;
-    overflow: hidden;
-    display: none;
-}
 
 #tou{
     position: absolute;
@@ -56,6 +44,7 @@ a:visited {
     height: 80px;
     top: 0px;
 }
+
 #tou span{
     position: absolute;
     top: 51px;
@@ -84,12 +73,14 @@ a:visited {
     height: 30px;
 }
 .information:hover{
-    border: 1px solid #666666;
+    border: 1px solid rgb(32, 77, 116);
     border-left-width: 5px;
-    box-shadow: 2px 2px #666666;
+    box-shadow: 2px 2px rgb(32, 77, 116);
 }
 .information a{
     text-decoration: none;
     color: white;
 }
-
+.information a:hover{
+    color: #53A4B1;
+}

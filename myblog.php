@@ -55,8 +55,7 @@
 
             <div class="col-sm-8 blog-main">
 <?php
-    include "db.php";
-    // session_start();
+
      if(isset($_SESSION['user_info'])){
           $user=$_SESSION['user_info'];
      }else{

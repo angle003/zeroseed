@@ -54,7 +54,6 @@
         <hr>
         <hr>
 <?php
-    include "db.php"; 
     $blog_id=$_GET['blog_id'];
     $blogs=getBlogById($blog_id);
     $blog=mysql_fetch_array($blogs);

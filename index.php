@@ -58,7 +58,6 @@
 
             <div class="col-sm-8 blog-main">
 <?php
-    include "db.php";
     $result=getBlogs();
     while ($row=mysql_fetch_array($result)) {
        $user_id=$row['blog_user_id'];

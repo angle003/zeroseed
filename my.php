@@ -41,7 +41,6 @@
     <!-- Fixed navbar -->
     <?php  
          include "top.php";
-         include "db.php";
          if(isset($_SESSION['user_info'])){
                $user=$_SESSION['user_info'];
          }else{

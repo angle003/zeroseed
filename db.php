@@ -69,14 +69,33 @@ function getCommentByBlogId($id){
   return $res;
 }
 
+function getMessageByUid($id){
+  $con=conn();
+  $res=mysql_query("select * from  user_message where user_message_uid='".$id."' and user_message_state=0");
+  mysql_close($con);
+  return $res;
+}
+
+function getMessagesCount($id){
+  $con=conn();
+  $res=mysql_query("select count(*) from  user_message where user_message_uid='".$id."' and user_message_state=0");
+  $num=mysql_fetch_row($res);
+  mysql_close($con);
+  return $num[0];
+}
+
 function  addLikesByBlogId($id){
   $con=conn();
-  $res=mysql_query("select blog_likes from blog where blog_id ='".$id."'");
-  $nums=mysql_fetch_row($res);
-  $nums[0]=$nums[0]+1;
-  $res=mysql_query("update blog set blog_likes='".$nums[0]."' where blog_id ='".$id."'");
+  $res=mysql_query("select * from blog where blog_id ='".$id."'");
+  $blog=mysql_fetch_array($res);
+  $likes=$blog['blog_likes']+1;
+  $uid=$blog['blog_user_id'];
+  $content="有人点赞了你的博客";
+  $url="comment.php?blog_id=".$id;
+  $res=mysql_query("update blog set blog_likes='".$likes."' where blog_id ='".$id."'");
+  mysql_query("insert into user_message(user_message_uid,user_message_content,user_message_url) values('".$uid."','".$content."','".$url."')");
   mysql_close($con);
-  return $nums[0];
+  return $likes;
 }
 
 function  addLikesByCommentId($id){
