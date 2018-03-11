@@ -57,7 +57,7 @@
                                          while ($row_m=mysql_fetch_array($result)) {
                                                 $cont=$row_m['user_message_content'];
                                                 $url=$row_m['user_message_url'];
-                                                echo " <div class='information' > <a href='".$url."'>".$cont."</a></div>";
+                                                echo "<div class='information' ><a href='".$url."' onclick='changeState()' >".$cont."</a></div>";
                                          }
                                    ?>
                              </span> 

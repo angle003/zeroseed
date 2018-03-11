@@ -90,7 +90,7 @@ function  addLikesByBlogId($id){
   $blog=mysql_fetch_array($res);
   $likes=$blog['blog_likes']+1;
   $uid=$blog['blog_user_id'];
-  $content="有人点赞了你的博客";
+  $content="赞了你的博客";
   $url="comment.php?blog_id=".$id;
   $res=mysql_query("update blog set blog_likes='".$likes."' where blog_id ='".$id."'");
   mysql_query("insert into user_message(user_message_uid,user_message_content,user_message_url) values('".$uid."','".$content."','".$url."')");
