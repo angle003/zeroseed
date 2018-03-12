@@ -51,7 +51,7 @@
                           <a href="#" id="atou" >动态</a>
                           <span id="tou" >
                              <button type="button" class="btn btn-danger btn-circle" ><?php echo $messages;?></button>
-                             <span  class="animated fadeIn">
+                             <span  class="animated fadeIn topnav_box">
                                    <?php  
                                          $result=getMessageByUid($user['uid']);
                                          while ($row_m=mysql_fetch_array($result)) {
@@ -91,6 +91,9 @@
          this.style.backgroundColor=oldColor;
          };
       }
+  function changeState(){
+
+  }
 </script>
 
       <!--弹窗 -->
