@@ -47,18 +47,34 @@
                         </ul>
                     </li>
                     <?php if($user){   $messages=getMessagesCount($user['uid']);   ?>
-                     <li>
-                          <a href="#" id="atou" >动态</a>
+                     <li >
+                          <a href="#" id="atou"  >动态</a>
                           <span id="tou" >
-                             <button type="button" class="btn btn-danger btn-circle" ><?php echo $messages;?></button>
-                             <span  class="animated fadeIn topnav_box">
+                             <?php if($messages!=0){?>
+                             <button id="m" type="button" class="btn btn-danger btn-circle" ><p><?php echo $messages;?></p></button>
+                             <? } ?>
+                             <span  class="animated fadeIn topnav_box"  onmouseover="<?php echo 'changeState('.$user['uid'].')';?>" >
                                    <?php  
-                                         $result=getMessageByUid($user['uid']);
+                                         $result=getMessageByUidNew($user['uid']);
                                          while ($row_m=mysql_fetch_array($result)) {
                                                 $cont=$row_m['user_message_content'];
                                                 $url=$row_m['user_message_url'];
-                                                echo "<div class='information' ><a href='".$url."' onclick='changeState()' >".$cont."</a></div>";
+                                                $image_url=getImageByUid($row_m['messager_uid']);
+                                                echo "<div class='information' >";
+                                                echo "<img src='".$image_url."' >";
+                                                echo "<a href='".$url."' >".$cont."</a></div>";
                                          }
+                                         echo "<div class='information' ><a href='#' >---------历史动态--------</a></div>";
+                                         $result=getMessageByUidOld($user['uid']);
+                                         while ($row_m=mysql_fetch_array($result)) {
+                                                $cont=$row_m['user_message_content'];
+                                                $url=$row_m['user_message_url'];
+                                                $image_url=getImageByUid($row_m['messager_uid']);
+                                                echo "<div class='information' >";
+                                                echo "<img src='".$image_url."' >";
+                                                echo "<a href='".$url."' >".$cont."</a></div>";
+                                         }
+
                                    ?>
                              </span> 
                           </span>
@@ -91,7 +107,14 @@
          this.style.backgroundColor=oldColor;
          };
       }
-  function changeState(){
+  var state=0;
+  function changeState(id){
+         if(state==0){
+              state=1;
+              document.getElementById("m").style.display="none";
+              console.log(id);
+              updeteMessage(id);
+         }
 
   }
 </script>

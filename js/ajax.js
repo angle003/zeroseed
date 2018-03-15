@@ -54,21 +54,40 @@ xmlHttp.open("GET",url,true)
 xmlHttp.send(null)
 } 
 
+function updeteMessage(id){
+  xmlHttp=GetXmlHttpObject()
+  if (xmlHttp==null)
+ {
+ alert ("Browser does not support HTTP Request")
+ return
+ }
+    var url="ajax.php"
+    url=url+"?message_uid="+id
+    url=url+"&sid="+Math.random()
+    xmlHttp.onreadystatechange=stateChanged
+    xmlHttp.open("GET",url,true)
+    xmlHttp.send(null)
+}
+
 function stateChanged()
 { 
 if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete")
  { 
- 	if(document.blog_id){
- 		var spanId="blog_likes_"+document.blog_id
+  if(xmlHttp.responseText == 404){
+       alert("请先登陆");
+  }else{
+      if(document.blog_id){
+        var spanId="blog_likes_"+document.blog_id
         document.getElementById(spanId).innerHTML=xmlHttp.responseText;
         document.blog_id=null;
- 	}
- 	if(document.comment_id){
- 		var spanId="blog_comment_likes_"+document.comment_id
+      }
+      if(document.comment_id){
+        var spanId="blog_comment_likes_"+document.comment_id
         document.getElementById(spanId).innerHTML=xmlHttp.responseText;
         document.comment_id=null;
- 	}
- 
+      }
+  }
+ 	
  } 
 }
 

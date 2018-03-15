@@ -69,9 +69,16 @@ function getCommentByBlogId($id){
   return $res;
 }
 
-function getMessageByUid($id){
+function getMessageByUidOld($id){
   $con=conn();
-  $res=mysql_query("select * from  user_message where user_message_uid='".$id."' and user_message_state=0");
+  $res=mysql_query("select * from  user_message where user_message_uid='".$id."' and user_message_state=1 order by  user_message.user_message_cretime desc ");
+  mysql_close($con);
+  return $res;
+}
+
+function getMessageByUidNew($id){
+  $con=conn();
+  $res=mysql_query("select * from  user_message where user_message_uid='".$id."' and user_message_state=0 order by  user_message.user_message_cretime desc ");
   mysql_close($con);
   return $res;
 }
@@ -84,7 +91,15 @@ function getMessagesCount($id){
   return $num[0];
 }
 
-function  addLikesByBlogId($id){
+function getImageByUid($id){
+  $con=conn();
+  $res=mysql_query("select user_image_url from user_info where user_id ='".$id."' ");
+  $num=mysql_fetch_row($res);
+  mysql_close($con);
+  return $num[0];
+}
+
+function  addLikesByBlogId($id,$m_uid){
   $con=conn();
   $res=mysql_query("select * from blog where blog_id ='".$id."'");
   $blog=mysql_fetch_array($res);
@@ -93,7 +108,7 @@ function  addLikesByBlogId($id){
   $content="赞了你的博客";
   $url="comment.php?blog_id=".$id;
   $res=mysql_query("update blog set blog_likes='".$likes."' where blog_id ='".$id."'");
-  mysql_query("insert into user_message(user_message_uid,user_message_content,user_message_url) values('".$uid."','".$content."','".$url."')");
+  mysql_query("insert into user_message(user_message_uid,user_message_content,user_message_url,messager_uid) values('".$uid."','".$content."','".$url."','".$m_uid."')");
   mysql_close($con);
   return $likes;
 }
@@ -176,6 +191,12 @@ function updateUserInfo($uid,$nickname,$email,$age,$sex,$introduce){
   }else{
       return false;
   }
+}
+
+function updeteMessageById($id){
+    $con=conn();
+    mysql_query("update user_message set user_message_state=1 where user_message_uid='".$id."'");
+    return true;
 }
 
 ?>
