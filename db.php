@@ -10,7 +10,7 @@ function conn(){
    return $con;
 }
 
-function  login($username,$password){
+function login($username,$password){
     $con=conn();
     $res=mysql_query("select * from user where user_name='".$username."' and user_password='".$password."' ");
     mysql_close($con);
@@ -99,7 +99,7 @@ function getImageByUid($id){
   return $num[0];
 }
 
-function  addLikesByBlogId($id,$m_uid){
+function addLikesByBlogId($id,$m_uid){
   $con=conn();
   $res=mysql_query("select * from blog where blog_id ='".$id."'");
   $blog=mysql_fetch_array($res);
@@ -163,6 +163,11 @@ function  addBlog($uid,$title,$content){
 function addBlogComment($uid,$comment,$blog_id){
   $con=conn();
   $res=mysql_query("insert into blog_comment(bolg_comment_uid,blog_comment_content,blog_id) values('".$uid."','".$comment."','".$blog_id."')");
+  $res2=mysql_query("select blog_user_id from blog where blog_id='".$blog_id."'");
+  $id=mysql_fetch_row($res2);
+  $content="评论了你的博客";
+  $url="comment.php?blog_id=".$blog_id;
+  mysql_query("insert into user_message(user_message_uid,user_message_content,user_message_url,messager_uid) values('".$id[0]."','".$content."','".$url."','".$uid."')");
   mysql_close($con);
   if($res > 0){
        return true;
@@ -174,6 +179,11 @@ function addBlogComment($uid,$comment,$blog_id){
 function addCommentComs($uid,$comment_id,$commentComs,$reUid){
   $con=conn();
   $res=mysql_query("insert into blog_comment(bolg_comment_uid,blog_comment_content,blog_comment_reply,blog_comment_reUid) values('".$uid."','".$commentComs."','".$comment_id."','".$reUid."')");
+  $res2=mysql_query("select blog_id from blog_comment where blog_comment_id='".$comment_id."'");
+  $blog_id=mysql_fetch_row($res2);
+  $content="回复了你";
+  $url="comment.php?blog_id=".$blog_id[0];
+   mysql_query("insert into user_message(user_message_uid,user_message_content,user_message_url,messager_uid) values('".$reUid."','".$content."','".$url."','".$uid."')");
   mysql_close($con);
   if($res>0){
       return true;
@@ -194,9 +204,10 @@ function updateUserInfo($uid,$nickname,$email,$age,$sex,$introduce){
 }
 
 function updeteMessageById($id){
-    $con=conn();
-    mysql_query("update user_message set user_message_state=1 where user_message_uid='".$id."'");
-    return true;
+  $con=conn();
+  mysql_query("update user_message set user_message_state=1 where user_message_uid='".$id."'");
+  mysql_close($con);
+  return true;
 }
 
 ?>
