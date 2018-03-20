@@ -7,8 +7,10 @@
  * More info: http://deepliquid.com/content/Jcrop_Implementation_Theory.html
  */
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+
 	$targ_w = $targ_h = 150;
 	$jpeg_quality = 90;
 
@@ -40,26 +42,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 <script type="text/javascript">
 
-   // function getFileUrl(sourceId) {   
-   //      var url;   
-   //      if (navigator.userAgent.indexOf("MSIE")>=1) { // IE   
-   //      url = document.getElementById(sourceId).value;   
-   //  }   
-   //      else if(navigator.userAgent.indexOf("Firefox")>0) { // Firefox   
-   //      url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));   
-   //  }   
-   //      else if(navigator.userAgent.indexOf("Chrome")>0) { // Chrome   
-   //      url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));   
-   //  }   
-   //      return url;   
-   //  }  
-   //  function preImg(sourceId, targetId) {   
-   //      var url = getFileUrl(sourceId);   
-   //      var imgPre = document.getElementById(targetId);   
-   //      imgPre.src = url;   
-   //  }   
+   function getFileUrl(sourceId) {   
+        var url;   
+        if (navigator.userAgent.indexOf("MSIE")>=1) { // IE   
+        url = document.getElementById(sourceId).value;   
+    }   
+        else if(navigator.userAgent.indexOf("Firefox")>0) { // Firefox   
+        url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));   
+    }   
+        else if(navigator.userAgent.indexOf("Chrome")>0) { // Chrome   
+        url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));   
+    }   
+        return url;   
+    }  
+   
 
-  $(function(){
+  function  start(){
       // Create variables (in this scope) to hold the API and image size
             var jcrop_api,
                 boundx,
@@ -102,15 +100,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 }
             };
 
-  });
-
-  function updateCoords(c)
+function updateCoords(c)
   {
     $('#x').val(c.x);
     $('#y').val(c.y);
     $('#w').val(c.w);
     $('#h').val(c.h);
   };
+  }
+
+  
 
   function checkCoords()
   {
@@ -118,6 +117,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     alert('Please select a crop region then press submit.');
     return false;
   };
+ 
+
+ function preImg(sourceId, targetId) {   
+      var url = getFileUrl(sourceId);   
+      var span=document.getElementById("span");
+      span.innerHTML="<img src='"+url+"'  id='cropbox' width='536px' height='536px' />";
+      $("#pre").attr('src',url);
+      start();
+    }   
 
 </script>
 <style type="text/css">
@@ -147,12 +155,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         /* The Javascript code will set the aspect ratio of the crop
    area based on the size of the thumbnail preview,
    specified here */
-        
-        #preview-pane .preview-container {
-            width: 150px;
-            height: 150px;
-            overflow: hidden;
-        }
+ #preview-pane .preview-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+ }
 
 </style>
 
@@ -162,34 +169,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <div class="container">
 <div class="row">
 <div class="span12">
-<div class="jc-demo-box">
+<div  class="jc-demo-box">
 		<!-- This is the image we're attaching Jcrop to -->
-      <!-- <input type="file" name="imgOne" id="imgOne1" onchange="preImg(this.id,'imgPre');" />    -->
-    <!-- <img id="imgPre" src="" width="300px" height="400px" style="display: block;" />    -->
-		<img src="images/img2.jpg"  id="cropbox" />
+    <!-- <input type="file" name="imgOne" id="imgOne1" onchange="preImg(this.id,'imgPre');" />    -->
+
+<form action="upload.php" method="post" enctype="multipart/form-data" onsubmit="return checkCoords();">
+          <label for="file">Filename:</label>
+          <input type="file" name="file" id="imgOne1" onchange="preImg(this.id,'imgPre');" />
+    <div id="span">
+       
+      </div>
+		<!-- <img src="images/img2.jpg"  id="cropbox" /> -->
      <div id="preview-pane">
            <div class="preview-container">
-                <img src="images/img2.jpg" class="jcrop-preview" alt="Preview" />
+                <img  id="pre"  src=""  class="jcrop-preview" alt="Preview" />
            </div>
      </div>
 
-
 		<!-- This is the form that our event handler fills -->
-		<form action="crop.php" method="post" onsubmit="return checkCoords();">
+		<!-- <form action="crop.php" method="post" onsubmit="return checkCoords();">
 			  <input type="hidden" id="x" name="x" />
 			  <input type="hidden" id="y" name="y" />
 			  <input type="hidden" id="w" name="w" />
 			  <input type="hidden" id="h" name="h" />
 			  <input type="submit" value="Crop Image" class="btn btn-large btn-inverse" />
-		</form>
+		</form> -->
 
-	
-
-
+          <br />
+          <input type="hidden" id="x" name="x" />
+          <input type="hidden" id="y" name="y" />
+          <input type="hidden" id="w" name="w" />
+          <input type="hidden" id="h" name="h" />
+          <input type="submit" name="submit" value="Submit"  class="btn btn-large btn-inverse"/>
+    </form>
+   <!-- <p><input type="button" id="upJQuery" value="用jQuery上传"></p> -->
 	</div>
 	</div>
 	</div>
 	</div>
 	</body>
-
+<script type="text/javascript">
+  $('#upJQuery').on('click', function() {
+    var fd = new FormData();
+    fd.append("upload", 1);
+    fd.append("upfile", $("#imgOne1").get(0).files[0]);
+    $.ajax({
+      url: "upload.php",
+      type: "POST",
+      processData: false,
+      contentType: false,
+      data: fd,
+      success: function(d) {
+         alert(d);
+      }
+    });
+  });
+</script>
 </html>
