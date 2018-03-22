@@ -24,6 +24,14 @@ function getBlogById($id){
   return $res;  
 }
 
+function getOldImageUrl($id){
+  $con=conn();
+  $res=mysql_query("select user_image_url from user_info where user_id ='".$id."'");
+  $url=mysql_fetch_row($res);
+  mysql_close($con);
+  return  $url[0];
+}
+
 function searchUserByName($username){
   $con=conn();
   $res=mysql_query("select count(*) from user where user_name='".$username."'");
@@ -206,6 +214,13 @@ function updateUserInfo($uid,$nickname,$email,$age,$sex,$introduce){
 function updeteMessageById($id){
   $con=conn();
   mysql_query("update user_message set user_message_state=1 where user_message_uid='".$id."'");
+  mysql_close($con);
+  return true;
+}
+
+function updateImageById($id,$dst){
+  $con=conn();
+  mysql_query("update user_info set user_image_url='".$dst."' where user_id='".$id."' ");
   mysql_close($con);
   return true;
 }

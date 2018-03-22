@@ -32,7 +32,7 @@
                     <?php  if($user){  ?>
                     <li><a href="myblog.php">My Blog</a></li>
                     <li><a href="blog.php">Write Blog</a></li>
-                    <li><a href="my.php">My</a></li>
+                    <li><a href="my.php">My</a></li>                  
                     <?php  }  ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>

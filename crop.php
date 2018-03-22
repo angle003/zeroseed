@@ -1,45 +1,15 @@
-<?php
-
-/**
- * Jcrop image cropping plugin for jQuery
- * Example cropping script
- * @copyright 2008-2009 Kelly Hallman
- * More info: http://deepliquid.com/content/Jcrop_Implementation_Theory.html
- */
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-
-	$targ_w = $targ_h = 150;
-	$jpeg_quality = 90;
-
-	$src = 'images/img2.jpg';
-	$img_r = imagecreatefromjpeg($src);
-	$dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
-
-	imagecopyresampled($dst_r,$img_r,0,0,$_POST['x'],$_POST['y'],
-	$targ_w,$targ_h,$_POST['w'],$_POST['h']);
-
-	header('Content-type: image/jpeg');
-	imagejpeg($dst_r,null,$jpeg_quality);
-
-	exit;
-}
-
-// If not a POST request, display page below:
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Live Cropping Demo</title>
+  <title>ZeroSeed Live Cropping</title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.Jcrop.min.js"></script>
-  <link rel="stylesheet" href="css/Jcrop-main.css" type="text/css" />
-  <link rel="stylesheet" href="css/Jcrop-demos.css" type="text/css" />
   <link rel="stylesheet" href="css/jquery.Jcrop.min.css" type="text/css" />
-
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 <script type="text/javascript">
 
    function getFileUrl(sourceId) {   
@@ -82,15 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 boundy = bounds[1];
                 // Store the API in the jcrop_api variable
                 jcrop_api = this;
-
                 // Move the preview into the jcrop container for css positioning
                 $preview.appendTo(jcrop_api.ui.holder);
     });
      function updatePreview(c) {
-                if (parseInt(c.w) > 0) {
+             if (parseInt(c.w) > 0) {
                     var rx = xsize / c.w;
                     var ry = ysize / c.h;
-
                     $pimg.css({
                         width: Math.round(rx * boundx) + 'px',
                         height: Math.round(ry * boundy) + 'px',
@@ -109,8 +77,6 @@ function updateCoords(c)
   };
   }
 
-  
-
   function checkCoords()
   {
     if (parseInt($('#w').val())) return true;
@@ -121,108 +87,121 @@ function updateCoords(c)
 
  function preImg(sourceId, targetId) {   
       var url = getFileUrl(sourceId);   
-      var span=document.getElementById("span");
-      span.innerHTML="<img src='"+url+"'  id='cropbox' width='536px' height='536px' />";
+      $("#cropbox").attr('src',url);
       $("#pre").attr('src',url);
       start();
     }   
 
 </script>
 <style type="text/css">
-  #target {
-    background-color: #ccc;
-    width: 500px;
-    height: 330px;
-    font-size: 24px;
-    display: block;
-  }
- .jcrop-holder #preview-pane {        
-    display: block;        
-    position: absolute;
-    z-index: 2000;
-    top: 10px;
-    right: -280px;
-    padding: 6px;
-    border: 1px rgba(0, 0, 0, .4) solid;
-    background-color: white;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
-    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);       
- }
-        /* The Javascript code will set the aspect ratio of the crop
-   area based on the size of the thumbnail preview,
-   specified here */
- #preview-pane .preview-container {
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
- }
+    .main{
+         margin:  0 auto;
+         width: 1000px;
+         padding: 0px;
+         position: relative;
+         background-color: white;
+         height: 800px;
+         -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+         -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+         box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+     }
+     .jcrop-holder #preview-pane {
+         display: block;
+         position: absolute;
+         z-index: 2000;
+         top: 5px;
+         left: 780px;
+         padding: 6px;
+         border: 1px rgba(0, 0, 0, .4) solid;
+         background-color: white;
+         -webkit-border-radius: 6px;
+         -moz-border-radius: 6px;
+         border-radius: 6px;
+         -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+         -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+         box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+      }
+        
+     #preview-pane .preview-container {
+         width: 150px;
+         height: 150px;
+         overflow: hidden;
+     }
+  
+     .img-container{
+         position:  absolute;
+         top: 100px;
+         left: 20px;
+         width: 950px;
+         height: 536px;
+         overflow: hidden;
+         z-index: 2000;
+         background-color: white;
+         border-radius: 6px;
+         -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+         -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+         box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+     }
 
+     #sub{
+        position: absolute;;
+        top: 730px;
+        left: 20px;
+     }
+
+     .a-upload {
+        margin-top: 60px;
+        margin-left: 20px;
+        position: relative;
+        display: inline-block;
+        background: #2b2b2b;
+        border: 1px solid #2b3b2b;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: white;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+     }
+     .a-upload input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+     }
+     .a-upload:hover {
+        background: white;
+        border-color: #2b2b2b;
+        color: black;
+        text-decoration: none;
+     }
 </style>
 
 </head>
 <body>
-
-<div class="container">
-<div class="row">
-<div class="span12">
-<div  class="jc-demo-box">
-		<!-- This is the image we're attaching Jcrop to -->
-    <!-- <input type="file" name="imgOne" id="imgOne1" onchange="preImg(this.id,'imgPre');" />    -->
-
-<form action="upload.php" method="post" enctype="multipart/form-data" onsubmit="return checkCoords();">
-          <label for="file">Filename:</label>
-          <input type="file" name="file" id="imgOne1" onchange="preImg(this.id,'imgPre');" />
-    <div id="span">
-       
-      </div>
-		<!-- <img src="images/img2.jpg"  id="cropbox" /> -->
-     <div id="preview-pane">
-           <div class="preview-container">
-                <img  id="pre"  src=""  class="jcrop-preview" alt="Preview" />
-           </div>
-     </div>
-
-		<!-- This is the form that our event handler fills -->
-		<!-- <form action="crop.php" method="post" onsubmit="return checkCoords();">
-			  <input type="hidden" id="x" name="x" />
-			  <input type="hidden" id="y" name="y" />
-			  <input type="hidden" id="w" name="w" />
-			  <input type="hidden" id="h" name="h" />
-			  <input type="submit" value="Crop Image" class="btn btn-large btn-inverse" />
-		</form> -->
-
+	  <?php  include "top.php"; ?>
+<div class="main">
+    <form action="upload.php" method="post" enctype="multipart/form-data" onsubmit="return checkCoords();">
+          <a href="javascript:;" class="a-upload"><input  type="file" name="file"  id="imgOne1" onchange="preImg(this.id,'pre');" />选择图片</a> 
+          <div class="img-container">
+              <div id="span" >  
+                    <img src=""  id='cropbox'  style="border:3px solid white;" />
+              </div>
+          </div>
+          <div id="preview-pane">
+               <div class="preview-container">
+                  <img  id="pre"  src=""  class="jcrop-preview"   />
+               </div>
+          </div>
           <br />
           <input type="hidden" id="x" name="x" />
           <input type="hidden" id="y" name="y" />
           <input type="hidden" id="w" name="w" />
           <input type="hidden" id="h" name="h" />
-          <input type="submit" name="submit" value="Submit"  class="btn btn-large btn-inverse"/>
+          <input id="sub" type="submit" name="submit" value="Submit"  class="btn btn-large btn-inverse"/>
     </form>
-   <!-- <p><input type="button" id="upJQuery" value="用jQuery上传"></p> -->
-	</div>
-	</div>
-	</div>
 	</div>
 	</body>
-<script type="text/javascript">
-  $('#upJQuery').on('click', function() {
-    var fd = new FormData();
-    fd.append("upload", 1);
-    fd.append("upfile", $("#imgOne1").get(0).files[0]);
-    $.ajax({
-      url: "upload.php",
-      type: "POST",
-      processData: false,
-      contentType: false,
-      data: fd,
-      success: function(d) {
-         alert(d);
-      }
-    });
-  });
-</script>
 </html>

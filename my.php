@@ -10,7 +10,6 @@
     <meta name="author" content="zero">
     <link rel="icon" href="favicon.ico">
     <link href="css/main.css" rel="stylesheet">
-
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
@@ -34,6 +33,46 @@
             line-height: 1.428571429;  
             border-radius: 15px;  
          }  
+         .my-image{
+            margin-left: 40%; 
+            margin-bottom: 50px; 
+            width: 150px; 
+            height: 150px;
+            color: white;
+            font-size: 30px;
+            position: relative;
+            border-radius: 50%;
+         }
+         .my-image:hover span{
+            display: block;
+         }
+         
+         .my-image img{
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+         }
+         .my-image span{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(0,0,0,0.4);
+            display: none;
+            border-radius: 50%;
+            line-height: 140px;
+            padding-left: 15px;
+         }
+         .my-image  a:hover {
+            color: white;
+         }
+
+        @media screen and (max-width: 450px) {
+            .my-image{
+                margin-left:30%; 
+            }
+        }
       </style>
 </head>
 
@@ -71,6 +110,10 @@
         </div>
         <div class="row">
             <div class="col-sm-8 blog-main">
+               <div class="my-image"> 
+                       <a href="crop.php"><span>修改头像</span></a>
+                       <img  src="<?php echo $user_image;?>" >
+               </div>
                <form  class="form-horizontal"   action="updateUserInfo.php" method="post" >
                         <input type="text" name="image"  value="<?php echo $user_image; ?>"  style="display: none;">
                         <input type="text" name="uid"  value="<?php echo $user['uid']; ?>"  style="display: none;">
