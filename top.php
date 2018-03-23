@@ -74,7 +74,6 @@
                                                 echo "<img src='".$image_url."' >";
                                                 echo "<a href='".$url."' >".$cont."</a></div>";
                                          }
-
                                    ?>
                              </span> 
                           </span>
@@ -112,7 +111,6 @@
          if(state==0){
               state=1;
               document.getElementById("m").style.display="none";
-              console.log(id);
               updeteMessage(id);
          }
 

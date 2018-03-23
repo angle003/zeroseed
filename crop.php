@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ZeroSeed Live Cropping</title>
+  <title>ZeroSeed</title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.Jcrop.min.js"></script>
@@ -26,13 +26,11 @@
         return url;   
     }  
    
-
   function  start(){
       // Create variables (in this scope) to hold the API and image size
             var jcrop_api,
                 boundx,
                 boundy,
-
                 // Grab some information about the preview pane
                 $preview = $('#preview-pane'),
                 $pcnt = $('#preview-pane .preview-container'),
@@ -182,6 +180,14 @@ function updateCoords(c)
 </head>
 <body>
 	  <?php  include "top.php"; ?>
+    <?php 
+ if(isset($_SESSION['user_info'])){
+          $user=$_SESSION['user_info'];
+     }else{
+          $user=null;
+          echo "<script> alert('请先登录!');  window.location.href='index.php';</script>";
+     } 
+?>
 <div class="main">
     <form action="upload.php" method="post" enctype="multipart/form-data" onsubmit="return checkCoords();">
           <a href="javascript:;" class="a-upload"><input  type="file" name="file"  id="imgOne1" onchange="preImg(this.id,'pre');" />选择图片</a> 
@@ -200,7 +206,7 @@ function updateCoords(c)
           <input type="hidden" id="y" name="y" />
           <input type="hidden" id="w" name="w" />
           <input type="hidden" id="h" name="h" />
-          <input id="sub" type="submit" name="submit" value="Submit"  class="btn btn-large btn-inverse"/>
+          <input id="sub" type="submit" name="submit" value="Submit"  class="btn  btn-inverse"/>
     </form>
 	</div>
 	</body>

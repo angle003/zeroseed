@@ -69,6 +69,21 @@ function updeteMessage(id){
     xmlHttp.send(null)
 }
 
+function delBlogById(id){
+     xmlHttp=GetXmlHttpObject()
+     if (xmlHttp==null)
+     {
+         alert ("Browser does not support HTTP Request")
+         return
+     }
+    var url="delBlog.php"
+    url=url+"?blog_id="+id
+    url=url+"&sid="+Math.random()
+    xmlHttp.onreadystatechange=stateChanged
+    xmlHttp.open("GET",url,true)
+    xmlHttp.send(null)
+}
+
 function stateChanged()
 { 
 if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete")

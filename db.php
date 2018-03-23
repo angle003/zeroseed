@@ -47,6 +47,13 @@ function getBlogs(){
   return $res;
 }
 
+function getHotBlogs(){
+  $con=conn();
+  $res=mysql_query("select * from blog  order by  blog.blog_likes desc limit 0 , 10 ");
+  mysql_close($con);
+  return $res;
+}
+
 function getBlogsByUid($id){
   $con=conn();
   $res=mysql_query("select * from blog where  blog_user_id='".$id."' order by  blog.blog_cretime desc"); 
@@ -168,6 +175,18 @@ function  addBlog($uid,$title,$content){
   }
 }
 
+function alertBlog($blog_id,$title,$content){
+  $con=conn();
+  $res=mysql_query("update blog set blog_title='".$title."',blog_content='".$content."' where blog_id='".$blog_id."' ");
+  mysql_close($con);
+  if($res > 0){
+      return true;
+  }else{
+      return false;
+  }
+
+}
+
 function addBlogComment($uid,$comment,$blog_id){
   $con=conn();
   $res=mysql_query("insert into blog_comment(bolg_comment_uid,blog_comment_content,blog_id) values('".$uid."','".$comment."','".$blog_id."')");
@@ -223,6 +242,13 @@ function updateImageById($id,$dst){
   mysql_query("update user_info set user_image_url='".$dst."' where user_id='".$id."' ");
   mysql_close($con);
   return true;
+}
+
+function delBlogById($id){
+  $con=conn();
+  mysql_query("delete from blog where  blog_id ='".$id."' ");
+  mysql_close($con);
+  return true; 
 }
 
 ?>

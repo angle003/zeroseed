@@ -95,7 +95,7 @@
 ?><!-- blog-post  -->  
             </div>
             <!-- /.blog-main -->
-          <?php include "right.html"; ?>
+          <?php include "right.php"; ?>
         </div>
         <!-- row -->
     </div>

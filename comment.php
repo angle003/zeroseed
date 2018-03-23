@@ -46,7 +46,7 @@
     if(isset($_SESSION['user_info'])){
         $user=$_SESSION['user_info'];
     }else{
-        $user=null;
+        $user=null;       
     } 
 ?>
     <div class="container theme-showcase" role="main">
@@ -59,10 +59,9 @@
     $blog=mysql_fetch_array($blogs);
     $user_info=getUserinfoById($blog['blog_user_id']);
     $comnum=getCommentsByBlogId($blog_id);
-    // $add=addLikesByBlogId($blog_id);
  ?>
         <div class="blog-header">
-            <h1 class="blog-title text-center"><?php echo $blog['blog_title']; ?></h1>
+            <h1 class="blog-title text-center"><?php  if($blog == null){echo "此博客已被博主删除";}else{ echo $blog['blog_title'];} ?></h1>
             <p class="lead blog-description text-center"><?php echo $blog['blog_cretime']; ?></p>
         </div>
         <div class="row">

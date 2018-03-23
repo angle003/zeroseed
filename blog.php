@@ -37,7 +37,7 @@
 </head>
 <body>
     <!-- Fixed navbar -->
-    <?php  include "top.php"; ?>
+    <?php  include "top.php";  ?>
     <div class="container theme-showcase" role="main">
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <hr>
@@ -47,35 +47,48 @@
           $user=$_SESSION['user_info'];
      }else{
           $user=null;
+          echo "<script> alert('请先登录!');  window.location.href='index.php';</script>";
      } 
+     $blog_id=$_GET['blog_id'];
+     $res=getBlogById($blog_id);
+     $blog=mysql_fetch_array($res);
+     $blog_title=$blog['blog_title'];
+     $blog_content=$blog['blog_content'];
 ?>
-        <div class="blog-header">
-            <h1 class="blog-title">-</h1>
+        <div class="blog-header" style="height: 50px;">
+           
         </div>
         <div class="row">
             <div class="col-sm-8 blog-main">
-                  <form class="form-horizontal " action="addblog.php"   method="post">
+                <?php if($blog_id==null){?>
+                  <form class="form-horizontal" action="addblog.php"   method="post">
+                <?php }else{?>
+                  <form class="form-horizontal" action="alertBlog.php"   method="post">
+                        <input type="text" name="blog_id"  value="<?php echo $blog_id;?>" style="display: none;">
+                <?php }?>
                         <div  id="title" class="form-group">
                             <label for="title" class="col-sm-2 control-label">标题</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="title"  autofocus  name="title">
+                                <input type="text" class="form-control" id="title"  value="<?php echo $blog_title;?>" autofocus  name="title">
                             </div>
                         </div>
                         <div  id="content" class="form-group">
                             <label for="content" class="col-sm-2 control-label">内容</label>
                             <div class="col-sm-10">
-                                <textarea  class="form-control" id="content" name="content" rows="20"></textarea>
+                                <textarea  class="form-control" id="content" name="content" rows="20"><?php echo $blog_content;?></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary">发送</button>
+                                    <button type="submit" class="btn btn-primary"><?php if($blog_id==null){echo "发送";}else{
+                                        echo "保存";
+                                    }?></button>
                             </div>
                         </div>
                   </form> 
             </div>
             <!-- /.blog-main -->
-          <?php include "right.html"; ?>
+          <?php include "right.php"; ?>
         </div>
         <!-- row -->
     </div>

@@ -106,7 +106,7 @@
            </div>
              <!-- /well -->
 
-               <?php include "right.html"; ?>
+               <?php include "right.php"; ?>
 
      </div>
      <!-- row -->

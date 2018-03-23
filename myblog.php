@@ -20,7 +20,7 @@
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
-     <script src="js/ajax.js"></script>
+    <script src="js/ajax.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -68,7 +68,7 @@
        $user_info=getUserinfoById($user_id);
        $comnum=getCommentsByBlogId($blog_id);
 ?>
-   <div class="blog-post">
+   <div  id="<?php echo "blog_".$blog_id; ?>" class="blog-post" >
                     <p class="blog-post-title" style=" position: relative;">
                     <?php echo "<img src='".$user_info['user_image_url']."' />"; ?>      
                         <a href="#" style="font-size: 2em;"><?php  echo $user_info['user_info_nickname']; ?></a><br>
@@ -88,6 +88,13 @@
                                 <span class="glyphicon-class"><?php echo $comnum; ?> comment</span>
                             </a>
                         </li>
+                         <li>
+                             <?php $alertUrl="blog.php?blog_id=".$blog_id."&random=".rand();?>
+                            <a  href="<?php echo $alertUrl; ?>" >编辑</a>
+                        </li>
+                        <li>
+                            <a  href="javascript:;"  onclick="<?php echo "delBlog(".$blog_id.")"; ?>" >删除</a>
+                        </li>
                     </ul>
     </div>
 <?php 
@@ -98,7 +105,7 @@
             </div>
             <!-- /.blog-main -->
 
-          <?php include "right.html"; ?>
+          <?php include "right.php"; ?>
 
         </div>
         <!-- row -->
@@ -106,7 +113,12 @@
     <!-- container  -->
 
     <!-- Placed at the end of the document so the pages load faster -->
-
+   <script type="text/javascript">
+       function delBlog(id){
+           document.getElementById("blog_"+id).style.display="none";   
+           delBlogById(id);
+       }
+   </script>
    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
