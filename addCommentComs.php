@@ -7,9 +7,9 @@
           $user=null;
           echo "<script> alert('请先登录!');  window.location.href='index.php'</script>";
      } 
-   $blog_id=$_POST['blog_id'];
-   $comment_id=$_POST['comment_id'];
-   $commentComs=$_POST['commentComs'];
+   $blog_id=htmlspecialchars($_POST['blog_id']);
+   $comment_id=htmlspecialchars($_POST['comment_id']);
+   $commentComs=htmlspecialchars($_POST['commentComs']);
    $reUid=$_POST['reUid'];
    $uid=$user['uid'];
    if($commentComs != "" ){

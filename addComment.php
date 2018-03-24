@@ -7,9 +7,9 @@
           $user=null;
           echo "<script> alert('请先登录!');  window.location.href='index.php'</script>";
      } 
-     $uid=$user['uid'];
-     $comment=$_POST['comment'];
-     $blog_id=$_POST['blog_id'];
+     $uid=htmlspecialchars($user['uid']);
+     $comment=htmlspecialchars($_POST['comment']);
+     $blog_id=htmlspecialchars($_POST['blog_id']);
      if($comment != "" ){
           if(addBlogComment($uid,$comment,$blog_id)){
               echo  1;

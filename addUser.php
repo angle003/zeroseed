@@ -1,10 +1,10 @@
 <?php
    include "db.php";
-   $username=$_POST['username'];
-   $password1=$_POST['password1'];
-   $password2=$_POST['password2'];
-   $email=$_POST['email'];
-   $sex=$_POST['sex'];
+   $username=htmlspecialchars($_POST['username']);
+   $password1=htmlspecialchars($_POST['password1']);
+   $password2=htmlspecialchars($_POST['password2']);
+   $email=htmlspecialchars($_POST['email']);
+   $sex=htmlspecialchars($_POST['sex']);
    if($username != "" && $password1 != "" && $password1==$password2 && $email !="" ){
    	    if(addUser($username,$password1,$email,$sex)){
    	    	     echo "<script> alert('success') </script>";

@@ -1,8 +1,9 @@
 <?php
      include "db.php";
-     $title=$_POST['title'];
-     $content=$_POST['content'];
-     $blog_id=$_POST['blog_id'];
+     $title=htmlspecialchars($_POST['title']);
+     $content=htmlspecialchars($_POST['content']);
+     $blog_id=htmlspecialchars($_POST['blog_id']);
+
      if($title != "" && $content != ""  &&  $title != " " && $content != " "){
           if(alertBlog($blog_id,$title,$content)){
               echo "<script> window.location.href='myblog.php'; </script>";

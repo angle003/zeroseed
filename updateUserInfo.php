@@ -1,18 +1,18 @@
 <?php 
      include "db.php"; 
-     $user_info['uid']=$_POST['uid'];
-     $uid=$_POST['uid'];
-     $user_info['user_image_url']=$_POST['image'];
-     $user_image_url=$_POST['image'];
-     $nickname=$_POST['nickname'];
+     $user_info['uid']=htmlspecialchars($_POST['uid']);
+     $uid=htmlspecialchars()$_POST['uid'];
+     $user_info['user_image_url']=htmlspecialchars($_POST['image']);
+     $user_image_url=htmlspecialchars($_POST['image']);
+     $nickname=htmlspecialchars($_POST['nickname']);
      $user_info['user_info_nickname']=$nickname;
-     $email=$_POST['email'];
+     $email=htmlspecialchars($_POST['email']);
      $user_info['user_mail']=$email;
-     $age=$_POST['age'];
+     $age=htmlspecialchars($_POST['age']);
      $user_info['user_age']=$age;
-     $sex=$_POST['sex'];
+     $sex=htmlspecialchars($_POST['sex']);
      $user_info['user_sex']=$sex;
-     $introduce=$_POST['introduce'];
+     $introduce=htmlspecialchars($_POST['introduce']);
      $user_info['user_introduce']=$introduce;
      if(updateUserInfo($uid,$nickname,$email,$age,$sex,$introduce)){
      	      session_start();

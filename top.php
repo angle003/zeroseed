@@ -28,27 +28,13 @@
          
             <div id="navbar" class="navbar-collapse collapse" >
                 <ul class="nav navbar-nav"  style="position: relative;">
-                    <li  class="active"  ><a href="index.php">Home</a></li>
-                    <?php  if($user){  ?>
-                    <li><a href="myblog.php">My Blog</a></li>
-                    <li><a href="blog.php">Write Blog</a></li>
-                    <li><a href="my.php">My</a></li>                  
-                    <?php  }  ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" data-toggle="modal" data-target="#exModal">login</a></li>
-                            <li><a href="loginout.php"  >login out</a></li>
-                            <li><a href="register.php">register</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                    <?php if($user){   $messages=getMessagesCount($user['uid']);   ?>
-                     <li >
-                          <a href="#" id="atou"  >动态</a>
+                    <li  class="active"  ><a href="index.php">首页</a></li>
+                    <?php  if($user){  $messages=getMessagesCount($user['uid']); ?>
+                    <li><a href="myblog.php">我的博客</a></li>
+                    <li><a href="blog.php">发博文</a></li>
+                    <li><a href="my.php">个人中心</a></li>   
+                    <li>
+                          <a href="#" id="atou" >动态</a>
                           <span id="tou" >
                              <?php if($messages!=0){?>
                              <button id="m" type="button" class="btn btn-danger btn-circle" ><p><?php echo $messages;?></p></button>
@@ -79,6 +65,17 @@
                           </span>
                      </li>
                     <?php  }  ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-toggle="modal" data-target="#exModal">登录</a></li>
+                            <?php  if($user){ ?><li><a href="loginout.php"  >注销</a></li><?php }else{ ?>
+                            <li><a href="register.php">注册</a></li> <?php }?>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">其他</li>
+                            <li><a href="#">...</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
