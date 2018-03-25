@@ -71,9 +71,11 @@
 ?>
    <div class="blog-post">
                     <p class="blog-post-title" style=" position: relative;">
-                    <?php echo "<img src='".$user_info['user_image_url']."' />"; ?>      
-                        <a href="#" style="font-size: 2em;"><?php  echo $user_info['user_info_nickname']; ?></a><br>
-                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_cretime']; ?> </span>
+                        <span class="info"> 
+                             <a href="#"><img src="<?php echo $user_info['user_image_url'];?>"  /></a>     
+                             <span class="personalInfo"></span>
+                        </span>
+                        <p class="blog-post-meta" ><span><?php  echo $user_info['user_info_nickname']."</span></br>".$row['blog_cretime']; ?> </p>
                     </p>
                     <p><?php echo $content; ?></p>
                     <ul class="glyphicons-list">
@@ -102,7 +104,7 @@
     <!-- container  -->
 
     <!-- Placed at the end of the document so the pages load faster -->
-   <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

@@ -84,11 +84,28 @@ function delBlogById(id){
     xmlHttp.send(null)
 }
 
+function delCommentById(id){
+    xmlHttp=GetXmlHttpObject()
+     if (xmlHttp==null)
+     {
+         alert ("Browser does not support HTTP Request")
+         return
+     }
+    var url="delComment.php"
+    url=url+"?comment_id="+id
+    url=url+"&sid="+Math.random()
+    xmlHttp.onreadystatechange=stateChanged
+    xmlHttp.open("GET",url,true)
+    xmlHttp.send(null)
+}
+
 function stateChanged()
 { 
 if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete")
  { 
-  if(xmlHttp.responseText == 404){
+  if(xmlHttp.responseText == 500){
+        alert("你没有该权限！");
+  }else if(xmlHttp.responseText == 404){
        alert("请先登陆");
   }else{
       if(document.blog_id){

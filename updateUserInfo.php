@@ -1,7 +1,7 @@
 <?php 
      include "db.php"; 
      $user_info['uid']=htmlspecialchars($_POST['uid']);
-     $uid=htmlspecialchars()$_POST['uid'];
+     $uid=htmlspecialchars($_POST['uid']);
      $user_info['user_image_url']=htmlspecialchars($_POST['image']);
      $user_image_url=htmlspecialchars($_POST['image']);
      $nickname=htmlspecialchars($_POST['nickname']);

@@ -108,7 +108,7 @@
         $comment_id=$row['blog_comment_id'];
         $comments=getCommentComsCount($comment_id);
 ?>
-                <div class="blog-post-comment">
+                <div id="<?php echo "comment_".$comment_id; ?>" class="blog-post-comment">
                     <p class="blog-post-title" style=" position: relative;">
                         <?php echo "<img src='".$user_info_coms['user_image_url']."' />"; ?>     
                                 <a href="#" style="font-size: 2em;"><?php echo $user_info_coms['user_info_nickname']; ?></a><br>
@@ -126,6 +126,13 @@
                                         <span class="glyphicon-class"><?php echo $comments; ?> 回复</span>
                             </a>
                         </li>
+                        <?php if($reUid==$user['uid']){?>
+                          <li>
+                            <a href="javascript:void(0);" onclick="<?php echo 'delComment('.$comment_id.')'?>">
+                                        <span class="glyphicon-class">删除</span>
+                            </a>
+                          </li>
+                         <?php }?>
                     </ul>
                      <form  action="addCommentComs.php" method="post" id="<?php echo 'commentComs'.$comment_id;?>"  class="form-horizontal"  style="display: none;" onSubmit="<?php echo 'return confirm('.$comment_id.')';?>" >
                         <div class="form-group">
@@ -180,6 +187,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
    <script type="text/javascript" src="js/jquery.min.js"></script>
    <script type="text/javascript">
+       function delComment(id){
+              document.getElementById("comment_"+id).style.display="none"; 
+              delCommentById(id);
+       }
        function showDilog(id){
            $("#commentComs"+id).fadeToggle();  
        }
