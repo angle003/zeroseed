@@ -51,7 +51,6 @@
         <div class="blog-header">
             <h1 class="blog-title">最新动态</h1>
             <p class="lead blog-description">展示最近的博文</p>
-           
         </div>
 
         <div class="row">
@@ -68,14 +67,31 @@
        if(strlen($content) >= 460){
             $content = substr($content,0,460)."..."; 
        }
+       $imgUrl=$user_info['user_image_url'];
+       $nickName=$user_info['user_info_nickname'];
+       $sex=$user_info['user_sex'];
+       $introduce=$user_info['user_introduce'];
+       if($sex == 0){
+           $sexUrl="images/women.png";
+       }else{
+           $sexUrl="images/man.png";
+       }
 ?>
    <div class="blog-post">
                     <p class="blog-post-title" style=" position: relative;">
                         <span class="info"> 
-                             <a href="#"><img src="<?php echo $user_info['user_image_url'];?>"  /></a>     
-                             <span class="personalInfo"></span>
+                             <a href="#"><img src="<?php echo $imgUrl;?>"  /></a>     
+                             <span class="personalInfo">
+                                <img class="img" src="<?php echo $imgUrl;?>"  />
+                                <span class="name"><?php echo $nickName;?> <img src="<?php echo $sexUrl;?>" /></span>
+                                <span class="note"><?php echo $introduce;?></span><?php if(!followed($user['uid'],$user_id)){ ?>
+                                <button class="btn btn-primary guanzhu"  value="<?php echo $user_id;?>">关注</button>
+                                <?php }else{ ?>
+                                <button class="btn btn-default" disabled="true" >已关注</button><?php }?>
+                                <button class="btn btn-info">私信</button>
+                             </span>
                         </span>
-                        <p class="blog-post-meta" ><span><?php  echo $user_info['user_info_nickname']."</span></br>".$row['blog_cretime']; ?> </p>
+                        <p class="blog-post-meta" ><span><?php  echo $nickName."</span></br>".$row['blog_cretime']; ?> </p>
                     </p>
                     <p><?php echo $content; ?></p>
                     <ul class="glyphicons-list">
@@ -105,6 +121,7 @@
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/guanzhu.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

@@ -140,7 +140,7 @@
                             <div class="col-sm-10">
                                 <div class="btn-group" data-toggle="buttons">
                                        <label id="sex_man" class="btn btn-info">
-                                       <input  type="radio" name="sex" value="1" ><img src="images/man.png" style="width: 14.5px;height: 15px;">
+                                       <input  type="radio" name="sex" value="1" ><img src="images/man.png" style="width: 10px;height: 15px;">
                                        </label>
                                        <label id="sex_women" class="btn btn-info">
                                        <input  type="radio" name="sex" value="0"><img src="images/women.png" style="width: 10px;height: 15px;margin-left:2px;margin-right: 3px;">

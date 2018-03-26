@@ -107,12 +107,31 @@
         $user_info_coms=getUserinfoById($reUid);
         $comment_id=$row['blog_comment_id'];
         $comments=getCommentComsCount($comment_id);
+        $imgUrl=$user_info_coms['user_image_url'];
+        $nickName=$user_info_coms['user_info_nickname'];
+        $sex=$user_info_coms['user_sex'];
+        $introduce=$user_info_coms['user_introduce'];
+        if($sex == 0){
+           $sexUrl="images/women.png";
+        }else{
+           $sexUrl="images/man.png";
+        }
 ?>
                 <div id="<?php echo "comment_".$comment_id; ?>" class="blog-post-comment">
                     <p class="blog-post-title" style=" position: relative;">
-                        <?php echo "<img src='".$user_info_coms['user_image_url']."' />"; ?>     
-                                <a href="#" style="font-size: 2em;"><?php echo $user_info_coms['user_info_nickname']; ?></a><br>
-                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_comment_cretime']; ?></span>
+                         <span class="info"> 
+                             <a href="#"><img src="<?php echo $imgUrl;?>"  /></a>     
+                             <span class="personalInfo">
+                                  <img class="img" src="<?php echo $imgUrl;?>"  />
+                                  <span class="name"><?php echo $nickName;?> <img src="<?php echo $sexUrl;?>" /></span>
+                                  <span class="note"><?php echo $introduce;?></span><?php if(!followed($user['uid'],$reUid)){?>
+                                  <button class="btn btn-primary guanzhu" value="<?php echo $reUid;?>">关注</button>
+                                  <?php }else{?>
+                                  <button class="btn btn-default" disabled="true" >已关注</button><?php }?>
+                                  <button class="btn btn-info">私信</button>
+                             </span>
+                        </span>
+                        <p class="blog-post-meta" ><span><?php  echo $nickName."</span></br>".$row['blog_comment_cretime']; ?> </p>
                     </p>
                     <p><?php echo $row['blog_comment_content']; ?></p>
                     <ul class="glyphicons-list-comment">
@@ -153,16 +172,32 @@
 <?php
     $comment_coms=getCommentComs($comment_id);
     while ($ro=mysql_fetch_array($comment_coms)) {
+        $roId=$ro['bolg_comment_uid'];
         $com_user_info=getUserinfoById($ro['bolg_comment_uid']);
         $com_comment_id=$ro['blog_comment_id'];
+        $imgUrl=$com_user_info['user_image_url'];
+        $nickName=$com_user_info['user_info_nickname'];
+        $cretime = substr($ro['blog_comment_cretime'],0,10);
 ?>
  <div class="blog-post-comment"  >
                     <p class="blog-post-title" style="position: relative;margin-left: 20px;">
-                        <?php echo "<img src='".$com_user_info['user_image_url']."' />"; ?>                 
-                                <a href="#" style="font-size: 2em;"><?php echo $com_user_info['user_info_nickname']; ?></a><br>
-                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $ro['blog_comment_cretime']; ?></span>
+                           <span class="info"> 
+                             <a href="#"><img src="<?php echo $imgUrl;?>"  /></a>     
+                             <span class="personalInfo">
+                                  <img class="img" src="<?php echo $imgUrl;?>"  />
+                                  <span class="name"><?php echo $nickName;?> <img src="<?php echo $sexUrl;?>" /></span>
+                                  <span class="note"><?php echo $introduce;?></span><?php if(!followed($user['uid'],$roId)){?>
+                                  <button class="btn btn-primary guanzhu" value="<?php echo $roId;?>">关注</button>
+                                  <?php }else{?>
+                                  <button class="btn btn-default" disabled="true">已关注</button><?php }?>
+                                  <button class="btn btn-info">私信</button>
+                             </span>
+                           </span>
+                           <p class="blog-post-meta" >
+                                <span><?php  echo $nickName."</span></br>".$cretime; ?>回复:<span><?php echo "  ".$ro['blog_comment_content']; ?></span>
+                           </p>
                     </p>
-                    <p style="margin-left: 20px;"><?php echo $ro['blog_comment_content']; ?></p>
+                    <!-- <p style="margin-left: 20px;"><?php echo $ro['blog_comment_content']; ?></p> -->
                     <ul class="glyphicons-list-comment" style="margin-right: 200px;" ontouch="showWindow()">
                         <li>
                             <a  href="javascript:void(0);" onclick="<?php echo "show(".$com_comment_id.")"; ?>"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -247,6 +282,7 @@
        });
    </script>
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/guanzhu.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>

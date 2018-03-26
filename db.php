@@ -213,16 +213,33 @@ function addUser($username,$password,$email,$sex){
 
 function  addBlog($uid,$title,$content){
   $con=conn();
-  check_input($id);
+  check_input($uid);
   check_input($title);
   check_input($content);
   $res=mysql_query("insert into blog(blog_user_id,blog_title,blog_content) values('".$uid."','".$title."','".$content."')");
+  $res2=mysql_query("select blog_id from blog where blog_user_id='".$uid."' order by blog.blog_cretime desc");
+  $blog_id=mysql_fetch_row($res2);
+  $friends=mysql_query("select user_id from user_friends where user_friends_uid='".$uid."' ");
+  while($row=mysql_fetch_array($friends)){
+       $fid=$row['user_id'];
+       $content="发了新的博客";
+       $url="comment.php?blog_id=".$blog_id[0];
+       mysql_query("insert into user_message(user_message_uid,user_message_content,user_message_url,messager_uid) values('".$fid."','".$content."','".$url."','".$uid."')");
+  }
   mysql_close($con);
   if($res > 0){
        return true;
   }else{
        return false;
   }
+}
+
+function getFriends($id){
+  $con=conn();
+  check_input($id);
+  $res=mysql_query("select user_friends_uid from user_friends where user_id='".$id."' ");
+  mysql_close($con);
+  return $res;
 }
 
 function alertBlog($blog_id,$title,$content){
@@ -334,9 +351,42 @@ function delCommentById($id,$uid){
    mysql_close($con);
    if($res >0){
       return true; 
-  }else{
+   }else{
       return false;
+   }
+}
+
+function addFollowById($uid,$fid){
+  $con=conn();
+  check_input($uid);
+  check_input($fid);
+  $fres=mysql_query("select count(*) from user_friends where user_id='".$uid."' and user_friends_uid='".$fid."' ");
+  $num=mysql_fetch_row($fres);
+  if($num[0]>0){
+      return false;
+  }else{
+      $res=mysql_query("insert into user_friends(user_id,user_friends_uid) values('".$uid."','".$fid."')");
   }
+  mysql_close($con);
+   if($res >0){
+      return true; 
+   }else{
+      return false;
+   }
+}
+
+function followed($uid,$fid){
+   $con=conn();
+   check_input($uid);
+   check_input($fid);
+   $fres=mysql_query("select count(*) from user_friends where user_id='".$uid."' and user_friends_uid='".$fid."' ");
+   $num=mysql_fetch_row($fres);
+   if($num[0]>0){
+     return true;
+   }else{
+     return false;
+   }
+   
 }
 
 ?>

@@ -8,7 +8,11 @@
      } 
 
      if($_POST['username']){
-          $username=$_POST['username'];
+          $username=htmlspecialchars($_POST['username']);
+          if (strlen($username) > 20) {
+             echo 1;
+             return;
+          }
           $result=searchUserByName($username);
           echo $result;
           return;

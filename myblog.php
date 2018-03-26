@@ -67,12 +67,15 @@
        $blog_id=$row['blog_id'];
        $user_info=getUserinfoById($user_id);
        $comnum=getCommentsByBlogId($blog_id);
+       $imgUrl=$user_info['user_image_url'];
+       $nickName=$user_info['user_info_nickname'];
 ?>
    <div  id="<?php echo "blog_".$blog_id; ?>" class="blog-post" >
                     <p class="blog-post-title" style=" position: relative;">
-                    <?php echo "<img src='".$user_info['user_image_url']."' />"; ?>      
-                        <a href="#" style="font-size: 2em;"><?php  echo $user_info['user_info_nickname']; ?></a><br>
-                        <span class="blog-post-meta " style="position: absolute;top:30px;left:45px;"><?php echo $row['blog_cretime']; ?> </span>
+                        <span class="info"> 
+                             <a href="#"><img src="<?php echo $imgUrl;?>"  /></a>     
+                        </span>
+                        <p class="blog-post-meta" ><span><?php  echo $nickName."</span></br>".$row['blog_cretime']; ?> </p>
                     </p>
                     <p><?php echo $row['blog_content']; ?></p>
                    

@@ -23,10 +23,10 @@
             }
         }
         
-        .blog-post-comment p img {
+      /*  .blog-post-comment p img {
             border-radius: 50%;
             border: 1px solid wheat;
-        }
+        }*/
         
         .blog-post-comment {
             float: left;
@@ -69,4 +69,14 @@
            margin-right: 5px;
            width: 48px;
            height: 48px;
+        }
+
+        .personalInfo .name img{
+            margin-left: 5px;
+        }
+
+        .blog-post-meta span:nth-child(2){
+           position: absolute;
+           top: 0;
+           left: 100px;
         }

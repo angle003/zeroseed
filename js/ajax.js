@@ -99,6 +99,10 @@ function delCommentById(id){
     xmlHttp.send(null)
 }
 
+function  followed(id){
+
+}
+
 function stateChanged()
 { 
 if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete")

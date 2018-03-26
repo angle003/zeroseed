@@ -84,7 +84,7 @@
                             <div class="col-sm-10">
                                 <div class="btn-group" data-toggle="buttons">
                                        <label  class="btn btn-default active">
-                                       <input  type="radio" name="sex" value="1" checked="true"><img src="images/man.png" style="width: 15px;height: 15px;">
+                                       <input  type="radio" name="sex" value="1" checked="true"><img src="images/man.png" style="width: 10px;height: 15px;">
                                        </label>
                                        <label  class="btn btn-default">
                                        <input  type="radio" name="sex" value="0"><img src="images/women.png" style="width: 10px;height: 15px;margin-left:2px;margin-right: 3px;">
@@ -142,7 +142,7 @@
                         $("#user-success").removeClass("has-success").addClass("has-error");
                         $("#user-icon").removeClass("glyphicon-ok").addClass("glyphicon-remove"); 
                         $("#inputUsername").popover('destroy');
-                        $("#inputUsername").popover({title:'已有该用户名'});      
+                        $("#inputUsername").popover({title:'已有该用户名或用户名不合法'});      
                         $("#inputUsername").popover('show');    
                         flag1=false;
                  }
