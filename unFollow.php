@@ -9,13 +9,12 @@
      } 
  $fid=htmlspecialchars($_POST['fid']);
  $uid=$user['uid'];
- if(addFollowById($uid,$fid)){
+ if(unFollowById($uid,$fid)){
  	echo  1;
  	return;
  }else{
  	echo  0;
  	return;
  }
- 
  
 ?>

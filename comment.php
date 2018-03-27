@@ -127,7 +127,7 @@
                                   <span class="note"><?php echo $introduce;?></span><?php if(!followed($user['uid'],$reUid)){?>
                                   <button class="btn btn-primary guanzhu" value="<?php echo $reUid;?>">关注</button>
                                   <?php }else{?>
-                                  <button class="btn btn-default" disabled="true" >已关注</button><?php }?>
+                                  <button class="btn btn-default unfollow" value="<?php echo $reUid;?>">已关注</button><?php }?>
                                   <button class="btn btn-info">私信</button>
                              </span>
                         </span>
@@ -189,7 +189,7 @@
                                   <span class="note"><?php echo $introduce;?></span><?php if(!followed($user['uid'],$roId)){?>
                                   <button class="btn btn-primary guanzhu" value="<?php echo $roId;?>">关注</button>
                                   <?php }else{?>
-                                  <button class="btn btn-default" disabled="true">已关注</button><?php }?>
+                                  <button class="btn btn-default unfollow" value="<?php echo $roId;?>">已关注</button><?php }?>
                                   <button class="btn btn-info">私信</button>
                              </span>
                            </span>
@@ -197,7 +197,6 @@
                                 <span><?php  echo $nickName."</span></br>".$cretime; ?>回复:<span><?php echo "  ".$ro['blog_comment_content']; ?></span>
                            </p>
                     </p>
-                    <!-- <p style="margin-left: 20px;"><?php echo $ro['blog_comment_content']; ?></p> -->
                     <ul class="glyphicons-list-comment" style="margin-right: 200px;" ontouch="showWindow()">
                         <li>
                             <a  href="javascript:void(0);" onclick="<?php echo "show(".$com_comment_id.")"; ?>"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>

@@ -87,7 +87,7 @@
                                 <span class="note"><?php echo $introduce;?></span><?php if(!followed($user['uid'],$user_id)){ ?>
                                 <button class="btn btn-primary guanzhu"  value="<?php echo $user_id;?>">关注</button>
                                 <?php }else{ ?>
-                                <button class="btn btn-default" disabled="true" >已关注</button><?php }?>
+                                <button class="btn btn-default unfollow" value="<?php echo $user_id;?>">已关注</button><?php }?>
                                 <button class="btn btn-info">私信</button>
                              </span>
                         </span>

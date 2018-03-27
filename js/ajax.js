@@ -99,9 +99,6 @@ function delCommentById(id){
     xmlHttp.send(null)
 }
 
-function  followed(id){
-
-}
 
 function stateChanged()
 { 

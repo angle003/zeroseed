@@ -18,8 +18,7 @@
                  <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img style="margin-top:-20%;width: 40px;height: 40px;border-radius: 50%;" 
-                    src="<?php  if($user){ echo $user['user_image_url']; }else{ echo 'https://static.hdslb.com/images/akari.jpg';} ?>" />
+                   <img class="nav-img" src="<?php if($user){ echo $user['user_image_url']; }else{ echo 'images/default.jpg';} ?>" />
                 </a>
                 <a class="navbar-brand" href="#"  id="username">
                     <?php  if($user){ echo $user['user_info_nickname']; }else{  echo "游客"; } ?>         
@@ -32,7 +31,28 @@
                     <?php  if($user){  $messages=getMessagesCount($user['uid']); ?>
                     <li><a href="myblog.php">我的博客</a></li>
                     <li><a href="blog.php">发博文</a></li>
-                    <li><a href="my.php">个人中心</a></li>   
+                    <li><a href="my.php">个人中心</a></li> 
+                    <li>
+                          <a href="#" id="xiaoxi" >消息</a>
+                           <span id="tou" >
+                             <?php if($messages!=0){?>
+                             <button id="m" type="button" class="btn btn-danger btn-circle" ><p><?php echo $messages;?></p></button>
+                             <? } ?>
+                             <span  class="animated fadeIn topnav_box"  onmouseover="<?php echo 'changeState('.$user['uid'].')';?>" >
+                                   <?php  
+                                         $result=getMessageByUidOld($user['uid']);
+                                         while ($row_m=mysql_fetch_array($result)) {
+                                                $cont=$row_m['user_message_content'];
+                                                $url=$row_m['user_message_url'];
+                                                $image_url=getImageByUid($row_m['messager_uid']);
+                                                echo "<div class='information' >";
+                                                echo "<img src='".$image_url."' >";
+                                                echo "<a href='".$url."' >".$cont."</a></div>";
+                                         }
+                                   ?>
+                             </span> 
+                          </span>
+                    </li> 
                     <li>
                           <a href="#" id="atou" >动态</a>
                           <span id="tou" >
@@ -68,8 +88,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" data-toggle="modal" data-target="#exModal">登录</a></li>
                             <?php  if($user){ ?><li><a href="loginout.php"  >注销</a></li><?php }else{ ?>
+                            <li><a href="#" data-toggle="modal" data-target="#exModal">登录</a></li>
                             <li><a href="register.php">注册</a></li> <?php }?>
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">其他</li>

@@ -375,6 +375,19 @@ function addFollowById($uid,$fid){
    }
 }
 
+function unFollowById($uid,$fid){
+  $con=conn();
+  check_input($uid);
+  check_input($fid);
+  $res=mysql_query("delete from user_friends where user_id='".$uid."' and user_friends_uid='".$fid."' ");
+  mysql_close($con);
+   if($res >0){
+      return true; 
+   }else{
+      return false;
+   }
+}
+
 function followed($uid,$fid){
    $con=conn();
    check_input($uid);
