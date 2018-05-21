@@ -18,7 +18,7 @@
                  <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                   <img class="nav-img" src="<?php if($user){ echo $user['user_image_url']; }else{ echo 'images/default.jpg';} ?>" />
+                   <img class="nav-img" src="<?php if($user){ echo $user['user_image_url']; }else{ echo 'https://static.hdslb.com/images/akari.jpg';} ?>" />
                 </a>
                 <a class="navbar-brand" href="#"  id="username">
                     <?php  if($user){ echo $user['user_info_nickname']; }else{  echo "游客"; } ?>         
@@ -35,21 +35,10 @@
                     <li>
                           <a href="#" id="xiaoxi" >消息</a>
                            <span id="tou" >
-                             <?php if($messages!=0){?>
+                        <!--      <?php if($messages!=0){?>
                              <button id="m" type="button" class="btn btn-danger btn-circle" ><p><?php echo $messages;?></p></button>
-                             <? } ?>
-                             <span  class="animated fadeIn topnav_box"  onmouseover="<?php echo 'changeState('.$user['uid'].')';?>" >
-                                   <?php  
-                                         $result=getMessageByUidOld($user['uid']);
-                                         while ($row_m=mysql_fetch_array($result)) {
-                                                $cont=$row_m['user_message_content'];
-                                                $url=$row_m['user_message_url'];
-                                                $image_url=getImageByUid($row_m['messager_uid']);
-                                                echo "<div class='information' >";
-                                                echo "<img src='".$image_url."' >";
-                                                echo "<a href='".$url."' >".$cont."</a></div>";
-                                         }
-                                   ?>
+                             <? } ?> -->
+                             <span  class="animated fadeIn topnav_box"  >
                              </span> 
                           </span>
                     </li> 

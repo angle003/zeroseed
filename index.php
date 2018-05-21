@@ -19,7 +19,7 @@
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
-     <script src="js/ajax.js"></script>
+    
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -88,7 +88,7 @@
                                 <button class="btn btn-primary guanzhu"  value="<?php echo $user_id;?>">关注</button>
                                 <?php }else{ ?>
                                 <button class="btn btn-default unfollow" value="<?php echo $user_id;?>">已关注</button><?php }?>
-                                <button class="btn btn-info">私信</button>
+                                <button class="btn btn-info usession" value="<?php echo $user_id;?>">私信</button>
                              </span>
                         </span>
                         <p class="blog-post-meta" ><span><?php  echo $nickName."</span></br>".$row['blog_cretime']; ?> </p>
@@ -122,6 +122,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/guanzhu.js"></script>
+     <script src="js/ajax.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

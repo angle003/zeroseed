@@ -399,7 +399,6 @@ function followed($uid,$fid){
    }else{
      return false;
    }
-   
 }
 
 ?>

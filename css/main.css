@@ -36,7 +36,6 @@ a:visited {
     margin-bottom: 100px;
 }
 
-
 #tou{
     position: absolute;
     width: 80px;
@@ -136,7 +135,7 @@ a:visited {
 
 .personalInfo{
     position: absolute;
-    top: -277px;
+    top: -275px;
     left: 0px;
     display: none;
     width: 400px;

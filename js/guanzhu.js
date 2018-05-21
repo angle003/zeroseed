@@ -43,3 +43,14 @@ $(".unfollow").hover(function(){
                    }
                });
 });
+
+$(".usession").on('click',function(){
+         var id=$(this).val();
+         window.location.href="message.php?uid="+id;
+});
+
+
+
+
+
+

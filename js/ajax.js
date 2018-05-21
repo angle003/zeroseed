@@ -108,6 +108,9 @@ if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete")
         alert("你没有该权限！");
   }else if(xmlHttp.responseText == 404){
        alert("请先登陆");
+       $('#exModal').modal({
+             keyboard: false
+      });
   }else{
       if(document.blog_id){
         var spanId="blog_likes_"+document.blog_id

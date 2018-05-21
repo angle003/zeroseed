@@ -22,7 +22,7 @@
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
-    <script src="js/ajax.js"></script>
+  
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -128,7 +128,7 @@
                                   <button class="btn btn-primary guanzhu" value="<?php echo $reUid;?>">关注</button>
                                   <?php }else{?>
                                   <button class="btn btn-default unfollow" value="<?php echo $reUid;?>">已关注</button><?php }?>
-                                  <button class="btn btn-info">私信</button>
+                                  <button class="btn btn-info usession"  value="<?php echo $reUid;?>">私信</button>
                              </span>
                         </span>
                         <p class="blog-post-meta" ><span><?php  echo $nickName."</span></br>".$row['blog_comment_cretime']; ?> </p>
@@ -190,7 +190,7 @@
                                   <button class="btn btn-primary guanzhu" value="<?php echo $roId;?>">关注</button>
                                   <?php }else{?>
                                   <button class="btn btn-default unfollow" value="<?php echo $roId;?>">已关注</button><?php }?>
-                                  <button class="btn btn-info">私信</button>
+                                  <button class="btn btn-info usession" alue="<?php echo $roId;?>">私信</button>
                              </span>
                            </span>
                            <p class="blog-post-meta" >
@@ -243,6 +243,9 @@
               }else{
                  alert("请先登录!");
                  $(this).blur();
+                 $('#exModal').modal({
+                     keyboard: false
+                 });
               }
         });
        $("#comment").focus(function(){
@@ -251,6 +254,9 @@
             }else{
                  alert("请先登录!");
                  $(this).blur();
+                 $('#exModal').modal({
+                        keyboard: false
+                 });
             }
        });
 
@@ -282,6 +288,7 @@
    </script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/guanzhu.js"></script>
+     <script src="js/ajax.js"></script>
     <script src="js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
