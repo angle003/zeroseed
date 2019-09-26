@@ -2,7 +2,7 @@
 
 //link db
 function conn(){
-   $con=mysql_connect("localhost","root","2815907");
+   $con=mysql_connect("localhost","root","123456");
    if(!$con){
        die("error!".mysql_error($con));
    }
